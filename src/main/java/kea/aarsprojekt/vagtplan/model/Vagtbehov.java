@@ -5,20 +5,37 @@ import java.util.Date;
 
 public class Vagtbehov {
 
-    LocalDateTime oprettelsesTid;
-    String oprettetAf;
-    LocalDateTime fra;
-    LocalDateTime til;
-    int antalPersoner;
-    String titel;
-    String kommentar;
+    private LocalDateTime oprettelsesTid;
+    private String oprettetAf;
+    private LocalDateTime fra;
+    private LocalDateTime til;
+    private int antalPersoner;
+    private String titel;
+    private String kommentar;
 
-    public Date getFra(){
-        @// TODO: 07-05-2018
+    public Vagtbehov(LocalDateTime oprettelsesTid, String oprettetAf, LocalDateTime fra, LocalDateTime til, int antalPersoner, String titel, String kommentar) {
+        this.oprettelsesTid = oprettelsesTid;
+        this.oprettetAf = oprettetAf;
+        this.fra = fra;
+        this.til = til;
+        this.antalPersoner = antalPersoner;
+        this.titel = titel;
+        this.kommentar = kommentar;
     }
 
-    public Date getTil(){
-        @// TODO: 07-05-2018
+    public Date getFraDato(){
+        Date fraDato = null; // "Udrav" datoen fra "fra" og returnér kun datoen.
+        // TODO: 07-05-2018
+
+        return fraDato;
+    }
+
+    public Date getTilDato(){
+        Date tilDato = null;
+        // "Udrav" datoen fra "fra" og returnér kun datoen.
+        // TODO: 07-05-2018
+
+        return tilDato;
     }
 
     public LocalDateTime getFra() {

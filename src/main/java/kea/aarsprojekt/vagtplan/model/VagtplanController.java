@@ -1,4 +1,6 @@
-package kea.aarsprojekt.vagtplan.controller;
+package kea.aarsprojekt.vagtplan.model;
 
-public class Controller {
+public class VagtplanController {
+
+    
 }

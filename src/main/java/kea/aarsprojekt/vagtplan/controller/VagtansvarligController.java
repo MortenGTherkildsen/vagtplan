@@ -1,4 +1,7 @@
 package kea.aarsprojekt.vagtplan.controller;
 
-public class VagtansvarligController {
+public class VagtansvarligController extends MedarbejderController {
+
+
+
 }

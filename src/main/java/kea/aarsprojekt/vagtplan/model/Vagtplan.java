@@ -12,7 +12,7 @@ public class Vagtplan {
     LocalDateTime til;
     boolean endeligVagtplan;
 
-    ArrayList<Vagt>;
+    ArrayList<Vagt> vagts;
 
     public void accepterVagtplan(){
         this.endeligVagtplan = true;
