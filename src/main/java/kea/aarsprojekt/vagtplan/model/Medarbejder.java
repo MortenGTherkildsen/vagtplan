@@ -15,10 +15,11 @@ public class Medarbejder {
     private int visIVagtplan; //Hvilket navn skal vises i vagtplan (username, name, initialer m.fl.)
     private boolean medarbejderStatus; // (Aktiv medarbejder/Fyret)(Måske er int bedre. Stadig 0/1 for aktiv/fyret, men 2 for f.eks. konsulent m.fl.?)
     private String uselog;
+    private String minVagtansvarlige;
 
 
 
-    public Medarbejder(String username, String password, String name, String initialer, String telefonnummer, int visIVagtplan, boolean medarbejderStatus, String uselog) {
+    public Medarbejder(String username, String password, String name, String initialer, String telefonnummer, int visIVagtplan, boolean medarbejderStatus, String uselog, String minVagtansvarlige) {
         this.username = username;
         this.password = password;
         this.name = name;
@@ -27,6 +28,7 @@ public class Medarbejder {
         this.visIVagtplan = visIVagtplan;
         this.medarbejderStatus = medarbejderStatus;
         this.uselog = uselog;
+        this.minVagtansvarlige = minVagtansvarlige;
     }
 
     public void visVagter(){
