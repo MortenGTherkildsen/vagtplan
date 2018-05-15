@@ -13,13 +13,18 @@ public class Medarbejder {
     private String initialer;
     private String telefonnummer;
     private int visIVagtplan; //Hvilket navn skal vises i vagtplan (username, name, initialer m.fl.)
-    private boolean medarbejderStatus; // (Aktiv medarbejder/Fyret)(Måske er int bedre. Stadig 0/1 for aktiv/fyret, men 2 for f.eks. konsulent m.fl.?)
+    private int medarbejderStatus; // (Aktiv medarbejder/Fyret)(Måske er int bedre. Stadig 0/1 for aktiv/fyret, men 2 for f.eks. konsulent m.fl.?)
     private String uselog;
+    private int erVagtansvarlig;
     private String minVagtansvarlige;
+    private Vagtplan vagtplan;
 
 
 
-    public Medarbejder(String username, String password, String name, String initialer, String telefonnummer, int visIVagtplan, boolean medarbejderStatus, String uselog, String minVagtansvarlige) {
+    public Medarbejder(){
+
+    }
+    public Medarbejder(String username, String password, String name, String initialer, String telefonnummer, int visIVagtplan, int medarbejderStatus, String uselog, int erVagtansvarlig, String minVagtansvarlige) {
         this.username = username;
         this.password = password;
         this.name = name;
@@ -28,8 +33,34 @@ public class Medarbejder {
         this.visIVagtplan = visIVagtplan;
         this.medarbejderStatus = medarbejderStatus;
         this.uselog = uselog;
+        this.erVagtansvarlig = erVagtansvarlig;
         this.minVagtansvarlige = minVagtansvarlige;
     }
+
+    public Medarbejder(String username, String password, String minVagtansvarlige){
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.initialer = initialer;
+        this.telefonnummer = telefonnummer;
+        this.visIVagtplan = 1;
+        this.medarbejderStatus = 1;
+
+        this.minVagtansvarlige = minVagtansvarlige;
+    }
+
+    public Medarbejder(String username){
+        this.username = username;
+        this.password = "1324";
+        this.name = "";
+        this.initialer = "";
+        this.telefonnummer = "";
+        this.visIVagtplan = 1;
+        this.medarbejderStatus = 1;
+
+        this.minVagtansvarlige = minVagtansvarlige;
+    }
+
 
     public void visVagter(){
         // TODO: 12-05-2018
@@ -91,11 +122,11 @@ public class Medarbejder {
         this.visIVagtplan = visIVagtplan;
     }
 
-    public boolean isMedarbejderStatus() {
+    public int isMedarbejderStatus() {
         return medarbejderStatus;
     }
 
-    public void setMedarbejderStatus(boolean medarbejderStatus) {
+    public void setMedarbejderStatus(int medarbejderStatus) {
         this.medarbejderStatus = medarbejderStatus;
     }
 
@@ -105,5 +136,21 @@ public class Medarbejder {
 
     public void setUselog(String uselog) {
         this.uselog = uselog;
+    }
+
+    @Override
+    public String toString(){
+        String tekstIVagtplan = username;
+
+        switch (visIVagtplan){
+            case 0: tekstIVagtplan = username;
+            break;
+            case 1: tekstIVagtplan = name;
+            break;
+            case 2: tekstIVagtplan = initialer;
+            break;
+
+        }
+        return tekstIVagtplan;
     }
 }

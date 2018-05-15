@@ -5,27 +5,35 @@ import java.util.ArrayList;
 
 public class Vagtansvarlig extends Medarbejder{
 
-    ArrayList<Medarbejder> medarbejderListe;
-    ArrayList<Vagtbehov> vagtbehovsliste;
-    ArrayList<Vagtplan> Vagtplansliste;
+    private ArrayList<Medarbejder> medarbejderListe;
+    private ArrayList<Vagtbehov> vagtbehovsListe;
+    private ArrayList<Vagtplan> VagtplansListe;
 
-    public Vagtansvarlig(String username, String password, String name, String initialer, String telefonnummer, int visIVagtplan, boolean medarbejderStatus, String uselog, ArrayList<Medarbejder> medarbejderListe, ArrayList<Vagtbehov> vagtbehovsliste, ArrayList<Vagtplan> vagtplansliste) {
-        super(username, password, name, initialer, telefonnummer, visIVagtplan, medarbejderStatus, uselog);
+    public Vagtansvarlig(String username, String password, String name, String initialer, String telefonnummer, int visIVagtplan, int medarbejderStatus, String uselog, int ervagtansvarlig, String minVagtansvarlige, ArrayList<Medarbejder> medarbejderListe, ArrayList<Vagtbehov> vagtbehovsliste, ArrayList<Vagtplan> vagtplansliste) {
+        super(username, password, name, initialer, telefonnummer, visIVagtplan, medarbejderStatus, uselog, ervagtansvarlig, minVagtansvarlige);
         this.medarbejderListe = medarbejderListe;
-        this.vagtbehovsliste = vagtbehovsliste;
-        Vagtplansliste = vagtplansliste;
+        this.vagtbehovsListe = vagtbehovsliste;
+        this.VagtplansListe = vagtplansliste;
     }
 
-    public void opretMedarbejder(){// TODO: 12-05-2018
+    public Medarbejder opretMedarbejder(String username){// TODO: 12-05-2018
+
+        Medarbejder medarbejder2 = new Medarbejder(username);
+        medarbejderListe.add(medarbejder2);
+
+
+        return medarbejder2;
         }
 
     public void toggleMedarbejderStatus(){// TODO: 12-05-2018
         }
 
-    public void seMedarbejderListe(){// TODO: 12-05-2018
+    public ArrayList<Medarbejder> seMedarbejderListe(){// TODO: 12-05-2018
+        return medarbejderListe;
         }
 
     public void toggleSigSelvIndSomMedarbejder(){// TODO: 12-05-2018
+
         }
 
     public void opretVagtbehov(){// TODO: 12-05-2018
