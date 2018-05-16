@@ -3,8 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="container">
+    <h1>Vagtansvarlig Menu</h1>
 
+    <form action="/semedarbejderliste" method="get">
+        <input type="submit"value="Medarbejdere" class="btn-create">
+    </form>
+
+    <br>
+
+    <form action="/vagtbehov" method="post">
+        <input type="submit"value="VagtBehov" class="btn-ed">
+    </form>
+
+    <br>
+
+
+    <form action="/vagtplaner"method="post">
+        <input type="submit"value="Vagtplan" class="btn-del">
+    </form>
+</div>
 </body>
 </html>

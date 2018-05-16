@@ -21,24 +21,25 @@ public class VagtansvarligController extends MedarbejderController {
 @Autowired
     private IVagtansvarligRepository vagtansvarligRepository;
 
-    @GetMapping("/vagtansvarlig")
-    public String index(Model model){
-        model.addAttribute("vagtplanliste", vagtansvarligRepository.visVagtplansListe());
-        model.addAttribute("medarbejderliste", vagtansvarligRepository.visMedarbejderListe());
-        model.addAttribute("vagtbehovsliste", vagtansvarligRepository.visVagtbehovsListe());
-        return "vagtansvarlig";
-    }
+//    @GetMapping("/vagtansvarlig")
+//    public String index(Model model){
+//        model.addAttribute("vagtplanliste", vagtansvarligRepository.visVagtplansListe());
+//        model.addAttribute("medarbejderliste", vagtansvarligRepository.visMedarbejderListe());
+//        model.addAttribute("vagtbehovsliste", vagtansvarligRepository.visVagtbehovsListe());
+//        return "vagtansvarlig";
+//    }
 
     @GetMapping("/semedarbejderliste")
     public String medarbejderliste(Model model){
         model.addAttribute("medarbejderliste", vagtansvarligRepository.visMedarbejderListe());
         return "semedarbejderliste";
     }
-//    @PostMapping("/semedarbejderliste")
-//    public String medarbejderliste(@RequestParam("username") String user, Medarbejder medarbejder){
-//        vagtansvarligRepository.opretMedarbejder(user);
-//        return "semedarbejderliste";
-//    }
+
+    @PostMapping("/semedarbejderliste")
+    public String medarbejderliste(@RequestParam("username") String user, Medarbejder medarbejder){
+        vagtansvarligRepository.opretMedarbejder(user);
+        return "redirect:/semedarbejderliste";
+    }
 
     @GetMapping("/vagtbehovsliste")
     public String vagtbehovsliste(Model model){
@@ -68,6 +69,21 @@ public class VagtansvarligController extends MedarbejderController {
         vagtansvarligRepository.opretVagtplan();
         return "vagtplan";
     }
+
+    @GetMapping("vagtansvarlig")
+    public String vagtansvarlig(Model model){
+
+        return "vagtansvarlig";
+    }
+
+//    @PostMapping("vagtansvarlig")
+//    public String vagtansvarligClick(Model model){
+//
+//
+//        return "redirect:/vagtansvarlig";
+//    }
+
+
 
 
 
