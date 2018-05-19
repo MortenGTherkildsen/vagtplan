@@ -9,7 +9,7 @@ import java.util.ArrayList;
 @Repository
 public interface IMedarbejderRepository {
 
-    ArrayList<Forbehold> seMineForbehold(Medarbejder medarbejder);
+    ArrayList<Forbehold> seForbeholdsListe();
     void redigerForbehold(Forbehold forbehold);
     void opretForbehold(Forbehold forbehold);
     ArrayList<Vagt> visVagtplan(Medarbejder medarbejder);

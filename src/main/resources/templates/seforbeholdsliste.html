@@ -2,12 +2,12 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Forbeholdsliste</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="container">
-    <h1>Personale</h1>
+    <h1>Forbehold</h1>
 
     <table>
         <thead>
@@ -20,11 +20,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="medarbejder : ${medarbejderliste}">
-            <td th:text="${medarbejder.username}"></td>
-            <td th:text="${medarbejder.name}"></td>
-            <td th:text="${medarbejder.initialer}"></td>
-            <td th:text="${medarbejder.telefonnummer}"></td>
+        <tr th:each="forbehold : ${forbeholdsliste}">
+            <td th:text="${forbehold.fra}"></td>
+            <td th:text="${forbehold.til}"></td>
+            <td th:text="${forbehold.accepteretAfVagtansvarlig}"></td>
+            <td th:text="${forbehold.kommentar}"></td>
             <td></td>
         </tr>
 

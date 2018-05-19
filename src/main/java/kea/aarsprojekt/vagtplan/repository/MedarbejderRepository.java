@@ -5,6 +5,7 @@ import kea.aarsprojekt.vagtplan.model.Medarbejder;
 import kea.aarsprojekt.vagtplan.model.Vagt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -14,15 +15,27 @@ public class MedarbejderRepository implements IMedarbejderRepository{
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    SqlRowSet sqlRowSet;
 
     @Override
-    public ArrayList<Forbehold> seMineForbehold(Medarbejder medarbejder){
+    public ArrayList<Forbehold> seForbeholdsListe(){
 
-        ArrayList<Forbehold> forbeholdsListe = new ArrayList<>();
+        ArrayList<Forbehold> forbeholdsliste = new ArrayList<>();
 
         //Populér forbeholdsliste med sql-kald
+        String sql = "SELECT * from vagtplantestdb.forbehold";
+        sqlRowSet = jdbcTemplate.queryForRowSet(sql);
 
-        return forbeholdsListe;
+        while (sqlRowSet.next()){
+            forbeholdsliste.add(new Forbehold(
+                    sqlRowSet.getString("fra_string"),
+                    sqlRowSet.getString("til_string"),
+                    sqlRowSet.getBoolean("accepteretAfVagtansvarlig"),
+                    sqlRowSet.getString("kommentar")
+
+            ));
+        }
+        return forbeholdsliste;
     }
 
     @Override

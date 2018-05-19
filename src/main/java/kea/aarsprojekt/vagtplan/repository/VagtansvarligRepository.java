@@ -72,25 +72,6 @@ public class VagtansvarligRepository extends MedarbejderRepository implements IV
 
     }
 
-    @Override
-    public ArrayList<Forbehold> opdaterMedarbejdersForbeholdsListe(String username){
-
-        ArrayList<Forbehold> forbeholdsliste = new ArrayList<>();
-        String sql = "SELECT * from vagtplantestdb.forbehold WHERE 'username' = " + username;
-        sqlRowSet2 = jdbcTemplate.queryForRowSet(sql);
-
-        while (sqlRowSet2.next()){
-            forbeholdsliste.add(new Forbehold(
-                    sqlRowSet2.getString("fra_string"),
-                    sqlRowSet2.getString("til_string"),
-                    sqlRowSet2.getBoolean("accepteretAfVagtansvarlig"),
-                    sqlRowSet2.getString("kommentar")
-
-            ));
-        }
-        return forbeholdsliste;
-    }
-
     //*******************************************
     //VAGTBEHOV
     //*******************************************

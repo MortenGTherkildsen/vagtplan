@@ -36,7 +36,7 @@ public class VagtansvarligController extends MedarbejderController {
     }
 
     @PostMapping("/semedarbejderliste")
-    public String medarbejderliste(@RequestParam("username") String user, Medarbejder medarbejder){
+    public String medarbejderliste(@RequestParam("username") String user){
         vagtansvarligRepository.opretMedarbejder(user);
         return "redirect:/semedarbejderliste";
     }
