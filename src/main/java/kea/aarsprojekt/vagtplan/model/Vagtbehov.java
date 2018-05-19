@@ -1,6 +1,9 @@
 package kea.aarsprojekt.vagtplan.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 public class Vagtbehov {
@@ -23,21 +26,19 @@ public class Vagtbehov {
         this.kommentar = kommentar;
     }
 
-    public Date getFraDato(){
-        Date fraDato = null; // "Udrav" datoen fra "fra" og returnér kun datoen.
-        // TODO: 07-05-2018
-
-        return fraDato;
+    public LocalDate getDate(LocalDateTime localDateTime){
+        LocalDate localDate = localDateTime.toLocalDate();
+        return localDate;
     }
 
-    public Date getTilDato(){
-        Date tilDato = null;
-        // "Udrav" datoen fra "fra" og returnér kun datoen.
-        // TODO: 07-05-2018
-
-        return tilDato;
+    public LocalTime getTime(LocalDateTime localDateTime){
+        LocalTime localTime = localDateTime.toLocalTime();
+        return localTime;
     }
 
+    public long getVagtbehovsLaengdeIMinutter(){
+        return ChronoUnit.MINUTES.between(fra,til);
+    }
     public LocalDateTime getFra() {
         return fra;
     }

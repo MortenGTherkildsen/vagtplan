@@ -13,14 +13,16 @@ public class VagtansvarligRepository extends MedarbejderRepository implements IV
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    SqlRowSet sqlRowSet;
+    SqlRowSet sqlRowSet, sqlRowSet2;
 
     @Override
     public void readAll(){
 
     }
 
-
+    //*******************************************
+    //MEDARBEJDERE
+    //*******************************************
     @Override
     public ArrayList<Medarbejder> visMedarbejderListe(){
         ArrayList<Medarbejder> medarbejderListe = new ArrayList<>();
@@ -29,6 +31,9 @@ public class VagtansvarligRepository extends MedarbejderRepository implements IV
         sqlRowSet = jdbcTemplate.queryForRowSet(sql);
 
         while (sqlRowSet.next()) {
+                ArrayList<Forbehold> forbeholdsliste = new ArrayList<>();
+                String sql_forbehold = "SELECT * FROM vagtplantestdb.forbehold";
+                sqlRowSet2 = jdbcTemplate.queryForRowSet(sql_forbehold);
 
                 medarbejderListe.add(new Medarbejder(sqlRowSet.getString("username"),
                     sqlRowSet.getString("password"),
@@ -40,7 +45,7 @@ public class VagtansvarligRepository extends MedarbejderRepository implements IV
                     sqlRowSet.getString("uselog"),
                     sqlRowSet.getInt("ervagtansvarlig"),
                     sqlRowSet.getString("vagtansvarligsemail"))
-            );
+                );
         }
 
         return medarbejderListe;
@@ -52,7 +57,6 @@ public class VagtansvarligRepository extends MedarbejderRepository implements IV
         String sql= "INSERT INTO medarbejdere(username) VALUES ("+ user + "); SELECT LAST_INSERT_ID();";
 
         jdbcTemplate.execute(sql);
-
     }
 
     public void opretMedarbejder(Medarbejder medarbejder){
@@ -68,6 +72,28 @@ public class VagtansvarligRepository extends MedarbejderRepository implements IV
 
     }
 
+    @Override
+    public ArrayList<Forbehold> opdaterMedarbejdersForbeholdsListe(String username){
+
+        ArrayList<Forbehold> forbeholdsliste = new ArrayList<>();
+        String sql = "SELECT * from vagtplantestdb.forbehold WHERE 'username' = " + username;
+        sqlRowSet2 = jdbcTemplate.queryForRowSet(sql);
+
+        while (sqlRowSet2.next()){
+            forbeholdsliste.add(new Forbehold(
+                    sqlRowSet2.getString("fra_string"),
+                    sqlRowSet2.getString("til_string"),
+                    sqlRowSet2.getBoolean("accepteretAfVagtansvarlig"),
+                    sqlRowSet2.getString("kommentar")
+
+            ));
+        }
+        return forbeholdsliste;
+    }
+
+    //*******************************************
+    //VAGTBEHOV
+    //*******************************************
     @Override
     public ArrayList<Vagtbehov> visVagtbehovsListe(){
         ArrayList<Vagtbehov> vagtbehovsListe = new ArrayList<>();
@@ -87,16 +113,28 @@ public class VagtansvarligRepository extends MedarbejderRepository implements IV
 
     }
 
+    //*******************************************
+    //VAGTPLAN
+    //*******************************************
     @Override
     public ArrayList<Vagtplan> visVagtplansListe(){
         ArrayList<Vagtplan> vagtplansListe = new ArrayList<>();
 
+        String sql = "SELECT * FROM vagtplantestdb.vagtplan";
+        sqlRowSet = jdbcTemplate.queryForRowSet(sql);
+
+        while (sqlRowSet.next()) {
+
+        }
         return vagtplansListe;
     }
 
     @Override
-    public void opretVagtplan(){
+    public ArrayList<Vagtplan> opretVagtplan(Vagtplan vagtplan){
 
+        ArrayList<Vagtplan> vagtplansListe = visVagtplansListe();
+        vagtplansListe.add(vagtplan);
+        return vagtplansListe;
     }
 
     @Override
@@ -118,15 +156,10 @@ public class VagtansvarligRepository extends MedarbejderRepository implements IV
         return vagtListe;
     }
 
-    @Override
-    public ArrayList<Forbehold> seMineForbehold(Medarbejder medarbejder){
-
-        ArrayList<Forbehold> forbeholdsListe = new ArrayList<>();
-
-        //Populér forbeholdsliste med sql-kald
-
-        return forbeholdsListe;
-    }
+    //*******************************************
+    //FORBEHOLD
+    //Medarbejderens liste over forbehold bliver populeret ovenfor under MEDARBEJDER
+    //*******************************************
 
     @Override
     public void opretForbehold(Forbehold forbehold){

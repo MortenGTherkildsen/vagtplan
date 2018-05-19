@@ -66,7 +66,7 @@ public class VagtansvarligController extends MedarbejderController {
 
     @PostMapping("/opretvagtplan")
     public String opretvagtplan(@ModelAttribute Vagtplan vagtplan){
-        vagtansvarligRepository.opretVagtplan();
+        vagtansvarligRepository.opretVagtplan(vagtplan);
         return "vagtplan";
     }
 

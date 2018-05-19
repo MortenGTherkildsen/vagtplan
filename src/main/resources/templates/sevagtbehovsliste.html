@@ -6,6 +6,37 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="container">
+
+
+
+    <h1>Personale</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>username</th>
+            <th>name</th>
+            <th>initialer</th>
+            <th>telefonnummer</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="vagtbehov : ${vagtbehovsliste}">
+            <td th:text="${vagtbehov.id}"></td>
+            <td th:text="${vagtbehov.fra}"></td>
+            <td th:text="${vagtbehov.til}"></td>
+            <td th:text="${vagtbehov.kommentar}"></td>
+            <td></td>
+        </tr>
+
+        </tbody>
+
+    </table>
+    <a href="/create" class="btn">Create</a>
+
+</div>
 
 </body>
 </html>

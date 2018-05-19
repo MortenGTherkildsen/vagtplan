@@ -1,7 +1,8 @@
 package kea.aarsprojekt.vagtplan.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -19,11 +20,26 @@ public class Medarbejder {
     private String minVagtansvarlige;
     private Vagtplan vagtplan;
 
+    private ArrayList<Forbehold> forbeholdsliste;
 
 
     public Medarbejder(){
 
     }
+    public Medarbejder(String username, String password, String name, String initialer, String telefonnummer, int visIVagtplan, int medarbejderStatus, String uselog, int erVagtansvarlig, String minVagtansvarlige, ArrayList<Forbehold> forbeholdsliste) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.initialer = initialer;
+        this.telefonnummer = telefonnummer;
+        this.visIVagtplan = visIVagtplan;
+        this.medarbejderStatus = medarbejderStatus;
+        this.uselog = uselog;
+        this.erVagtansvarlig = erVagtansvarlig;
+        this.minVagtansvarlige = minVagtansvarlige;
+        this.forbeholdsliste = forbeholdsliste;
+    }
+
     public Medarbejder(String username, String password, String name, String initialer, String telefonnummer, int visIVagtplan, int medarbejderStatus, String uselog, int erVagtansvarlig, String minVagtansvarlige) {
         this.username = username;
         this.password = password;
@@ -63,16 +79,29 @@ public class Medarbejder {
 
 
     public void visVagter(){
-        // TODO: 12-05-2018
+        // TODO: 18-05-2018
+    }
+
+    public boolean harForbehold(LocalDate localDate){
+        boolean harforbehold = false;
+
+        for (Forbehold forbehold:forbeholdsliste) {
+            if(forbehold.getFra().toLocalDate().equals(localDate)){
+                harforbehold = true;
+            }
+        }
+        return harforbehold;
     }
 
     public void opretForbehold(LocalDateTime fra, LocalDateTime til, String kommentar){
-        // TODO: 07-05-2018
+        Forbehold forbehold = new Forbehold(fra, til, kommentar);
+        forbeholdsliste.add(forbehold);
     }
 
     public void redigerForbehold(Forbehold forbehold){
         // TODO: 07-05-2018
     }
+
 
     public String getUsername() {
         return username;
@@ -122,7 +151,7 @@ public class Medarbejder {
         this.visIVagtplan = visIVagtplan;
     }
 
-    public int isMedarbejderStatus() {
+    public int getMedarbejderStatus() {
         return medarbejderStatus;
     }
 

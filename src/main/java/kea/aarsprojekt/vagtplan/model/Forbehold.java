@@ -1,5 +1,6 @@
 package kea.aarsprojekt.vagtplan.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Forbehold {
@@ -10,6 +11,12 @@ public class Forbehold {
     private Boolean accepteretAfVagtansvarlig;
     private String kommentar;
 
+    public Forbehold(String fra_string, String til_string, boolean accepteretAfVagtansvarlig, String kommentar){
+        this.fra = LocalDateTime.parse(fra_string);
+        this.til = LocalDateTime.parse(til_string);
+        this.accepteretAfVagtansvarlig = accepteretAfVagtansvarlig;
+        this.kommentar = kommentar;
+    }
     public Forbehold(LocalDateTime fra, LocalDateTime til, String kommentar) {
         this.fra = fra;
         this.til = til;

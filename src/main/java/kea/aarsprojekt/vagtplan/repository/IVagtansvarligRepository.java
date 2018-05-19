@@ -1,5 +1,6 @@
 package kea.aarsprojekt.vagtplan.repository;
 
+import kea.aarsprojekt.vagtplan.model.Forbehold;
 import kea.aarsprojekt.vagtplan.model.Medarbejder;
 import kea.aarsprojekt.vagtplan.model.Vagtbehov;
 import kea.aarsprojekt.vagtplan.model.Vagtplan;
@@ -16,12 +17,13 @@ public interface IVagtansvarligRepository extends IMedarbejderRepository{
     void opretMedarbejder(String username);
     void opretMedarbejder(Medarbejder medarbejder);
     void opdaterMedarbejder(Medarbejder medarbejder);
+    ArrayList<Forbehold> opdaterMedarbejdersForbeholdsListe(String username);
     ArrayList<Vagtbehov> visVagtbehovsListe();
     void opretVagtbehov(Vagtbehov vagtbehov);
     void redigerVagtbehov(Vagtbehov vagtbehov);
     // void seVagtbehov(Vagtbehov vagtbehov); Morten: Mener den er overflødig pga "inline-edit" funktionalitet
     ArrayList<Vagtplan> visVagtplansListe();
     Vagtplan visVagtplan();
-    void opretVagtplan();
+    ArrayList<Vagtplan> opretVagtplan(Vagtplan vagtplan);
 
 }
