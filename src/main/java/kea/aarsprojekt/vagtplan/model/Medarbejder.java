@@ -102,6 +102,9 @@ public class Medarbejder {
         // TODO: 07-05-2018
     }
 
+    public ArrayList<Forbehold> getForbeholdsliste() {
+        return forbeholdsliste;
+    }
 
     public String getUsername() {
         return username;

@@ -21,6 +21,7 @@ public class VagtansvarligController extends MedarbejderController {
 @Autowired
     private IVagtansvarligRepository vagtansvarligRepository;
 
+
 //    @GetMapping("/vagtansvarlig")
 //    public String index(Model model){
 //        model.addAttribute("vagtplanliste", vagtansvarligRepository.visVagtplansListe());
@@ -33,6 +34,12 @@ public class VagtansvarligController extends MedarbejderController {
     public String medarbejderliste(Model model){
         model.addAttribute("medarbejderliste", vagtansvarligRepository.visMedarbejderListe());
         return "semedarbejderliste";
+    }
+
+    @GetMapping("/semedarbejdersforbeholdsliste")
+    public String seforbeholdsliste(@RequestParam ("username") Model model){
+        model.addAttribute("forbeholdsliste", vagtansvarligRepository.seForbeholdsListe());
+        return "seforbeholdsliste";
     }
 
     @PostMapping("/semedarbejderliste")
