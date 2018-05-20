@@ -7,19 +7,25 @@
 </head>
 <body>
 <div class="container">
-    <h1>Vagtplan Program</h1>
-    <label for="">Email</label>
-    <input type="text"name="Email" placeholder="Email">
-
-    <br>
-    <label for="">Password</label>
-    <input type="text"name="Password" placeholder="Password">
-    <br>
-
-    <form action="/vagtansvarlig" method="get">
-        <input type="submit"value="Log-In" class="btn btn">
+    <h1>Login</h1>
+    <form name='f' action="vagtansvarlig" method='POST'>
+        <table>
+            <tr>
+                <td>User:</td>
+                <td><input type='text' name='username' value=''></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type='password' name='password' /></td>
+            </tr>
+            <tr>
+                <td><input name="submit" type="submit" value="submit" /></td>
+            </tr>
+        </table>
+        <input type="submit"value="Log-In" class="btn-create">
     </form>
     <a href="/medarbejder" class="btn btn-ed">Medarbejder</a>
+
 </div>
 
 </body>

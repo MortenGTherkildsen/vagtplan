@@ -10,20 +10,19 @@
 
 
 
-    <h1>Personale</h1>
+    <h1>Vagebehov</h1>
 
     <table>
         <thead>
         <tr>
-            <th>username</th>
-            <th>name</th>
-            <th>initialer</th>
-            <th>telefonnummer</th>
-            <th></th>
+            <th>ID</th>
+            <th>Fra</th>
+            <th>Til</th>
+            <th>Kommentar</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="vagtbehov : ${vagtbehovsliste}">
+        <tr th:each="vagtbehov : ${vagtbehov}">
             <td th:text="${vagtbehov.id}"></td>
             <td th:text="${vagtbehov.fra}"></td>
             <td th:text="${vagtbehov.til}"></td>
@@ -34,7 +33,7 @@
         </tbody>
 
     </table>
-    <a href="/create" class="btn">Create</a>
+    <a href="/opretvagtbehov" class="btn">Create</a>
 
 </div>
 

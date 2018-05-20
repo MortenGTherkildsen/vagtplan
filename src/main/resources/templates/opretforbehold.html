@@ -6,6 +6,38 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="container">
+
+
+
+    <h1>Forbehold</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Fra</th>
+            <th>Til</th>
+            <th>Kommentar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="forbehold : ${forbehold}">
+            <td th:text="${forbehold.fra}"></td>
+            <td th:text="${forbehold.til}"></td>
+            <td th:text="${forbehold.kommentar}"></td>
+            <td><a href="/create" class="btn-del">Slet</a>
+                <a href="/create" class="btn-ed">Opdater</a>
+            </td>
+
+
+        </tr>
+
+        </tbody>
+
+    </table>
+    <a href="/create" class="btn">Create</a>
+
+</div>
 
 </body>
 </html>

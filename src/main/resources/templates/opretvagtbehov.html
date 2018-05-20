@@ -6,6 +6,35 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="container">
+<form action="/create" method="post">
 
+    <label for="">oprettelsestid</label><br>
+    <input type="date"name="oprettelsesTid"placeholder="oprettelsesTid">
+
+    <br>
+    <label for="">Fra</label><br>
+    <input type="date"name="fra"placeholder="Fra">
+    <br>
+    <label for="">Til</label><br>
+    <input type="date"name="til"placeholder="Til">
+    <br>
+    <label for="">OprettetAf</label><br>
+    <input type="text"name="oprettetAf"placeholder="OprettetAf">
+    <br>
+    <label for="">AntalPersoner</label><br>
+    <input type="text"name="antalPersoner"placeholder="AntalPersoner">
+    <br>
+    <label for="">Titel</label><br>
+    <input type="text"name="titel"placeholder="Titel">
+    <br>
+    <label for="">Kommentar</label><br>
+    <input type="text"name="kommentar"placeholder="Kommentar">
+    <br>
+
+    <input type="submit"class="btn-create" value="SEND">
+
+</form>
+</div>
 </body>
 </html>
