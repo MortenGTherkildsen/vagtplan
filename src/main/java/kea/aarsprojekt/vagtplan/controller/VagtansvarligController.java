@@ -13,14 +13,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-//lrosadaskdasjklajslkdjas
+
 @Controller
 public class VagtansvarligController extends MedarbejderController {
 
 
 @Autowired
     private IVagtansvarligRepository vagtansvarligRepository;
-
 
 //    @GetMapping("/vagtansvarlig")
 //    public String index(Model model){
@@ -36,27 +35,21 @@ public class VagtansvarligController extends MedarbejderController {
         return "semedarbejderliste";
     }
 
-    @GetMapping("/semedarbejdersforbeholdsliste")
-    public String seforbeholdsliste(@RequestParam ("username") Model model){
-        model.addAttribute("forbeholdsliste", vagtansvarligRepository.seForbeholdsListe());
-        return "seforbeholdsliste";
-    }
-
     @PostMapping("/semedarbejderliste")
-    public String medarbejderliste(@RequestParam("username") String user){
+    public String medarbejderliste(@RequestParam("username") String user, Medarbejder medarbejder){
         vagtansvarligRepository.opretMedarbejder(user);
         return "redirect:/semedarbejderliste";
     }
 
-    @GetMapping("/vagtbehovsliste")
+    @GetMapping("/sevagtbehovsliste")
     public String vagtbehovsliste(Model model){
         model.addAttribute("vagtbehovsliste", vagtansvarligRepository.visVagtbehovsListe());
-        return "vagtbehovsliste";
+        return "sevagtbehovsliste";
     }
-    @PostMapping("/vagtbehovsliste")
+    @PostMapping("/sevagtbehovsliste")
     public String vagtbehovsliste(@ModelAttribute Vagtbehov vagtbehov){
         vagtansvarligRepository.opretVagtbehov(vagtbehov);
-        return "vagtbehovsliste";
+        return "sevagtbehovsliste";
     }
 
     @GetMapping("/vagtplansliste")
@@ -83,15 +76,35 @@ public class VagtansvarligController extends MedarbejderController {
         return "vagtansvarlig";
     }
 
-//    @PostMapping("vagtansvarlig")
-//    public String vagtansvarligClick(Model model){
-//
-//
-//        return "redirect:/vagtansvarlig";
-//    }
+    @PostMapping("vagtansvarlig")
+    public String vagtansvarligClick(Model model){
 
 
+        return "redirect:/vagtansvarlig";
+   }
 
 
+    @GetMapping("medarbejder")
+    public  String MedarbejderMenu(Model model) {
 
+        return "medarbejder";
+
+    }
+    @GetMapping("opretforbehold")
+    public String Forbeholdmenu (Model model){
+        // model.addAttribute("forbehold",medarbejderRepository.seMineForbehold());
+        return "opretforbehold";
+    }
+    @PostMapping("opretforbehold")
+    public String Forbeholdmenu1 (Model model){
+        return "opretforbehold";
+    }
+    @GetMapping("opretvagtbehov")
+    public String Vagtbehov (Model model) {
+        return "opretvagtbehov";
+    }
+    @PostMapping ("opretvagtbehov")
+    public String Vagtbehovlist (Model model){
+        return "redirect:/sevagtbehovsliste";
+    }
 }

@@ -12,9 +12,9 @@ public class MedarbejderController {
 @Autowired
     IMedarbejderRepository medarbejderRepository;
 
-    @GetMapping("/seforbeholdsliste")
-    public String seforbeholdsliste(Model model){
-        model.addAttribute("forbeholdsliste", medarbejderRepository.seForbeholdsListe());
-        return "seforbeholdsliste";
-    }
+   // @GetMapping("/seforbeholdsliste")
+    //public String seforbeholdsliste(Model model){
+      //  model.addAttribute("forbeholdsliste", medarbejderRepository.seForbeholdsListe());
+        //return "seforbeholdsliste";
+   // }
 }
