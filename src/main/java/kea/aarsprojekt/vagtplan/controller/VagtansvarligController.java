@@ -41,6 +41,13 @@ public class VagtansvarligController extends MedarbejderController {
         return "redirect:/semedarbejderliste";
     }
 
+    @GetMapping("/semedarbejder")
+    public String semedarbejder(@RequestParam("username") String username, Model model){
+        model.addAttribute("medarbejder", vagtansvarligRepository.getMedarbejder(username));
+
+        return "semedarbejder";
+    }
+
     @GetMapping("/sevagtbehovsliste")
     public String vagtbehovsliste(Model model){
         model.addAttribute("vagtbehovsliste", vagtansvarligRepository.visVagtbehovsListe());

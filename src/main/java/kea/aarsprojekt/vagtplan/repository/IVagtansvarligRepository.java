@@ -24,5 +24,6 @@ public interface IVagtansvarligRepository extends IMedarbejderRepository{
     ArrayList<Vagtplan> visVagtplansListe();
     Vagtplan visVagtplan();
     ArrayList<Vagtplan> opretVagtplan(Vagtplan vagtplan);
+    Medarbejder getMedarbejder(String username);
 
 }
