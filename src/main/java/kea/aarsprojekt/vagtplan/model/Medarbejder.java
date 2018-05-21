@@ -10,46 +10,65 @@ public class Medarbejder {
 
     private String username;
     private String password;
+    private String role;
     private String name;
     private String initialer;
     private String telefonnummer;
-    private int visIVagtplan; //Hvilket navn skal vises i vagtplan (username, name, initialer m.fl.)
+    private String visivagtplan; //Hvilket navn skal vises i vagtplan (username, name, initialer m.fl.)
     private int medarbejderStatus; // (Aktiv medarbejder/Fyret)(Måske er int bedre. Stadig 0/1 for aktiv/fyret, men 2 for f.eks. konsulent m.fl.?)
     private String uselog;
-    private int erVagtansvarlig;
     private String minVagtansvarlige;
-    private Vagtplan vagtplan;
 
     private ArrayList<Forbehold> forbeholdsliste;
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getMinVagtansvarlige() {
+        return minVagtansvarlige;
+    }
+
+    public void setMinVagtansvarlige(String minVagtansvarlige) {
+        this.minVagtansvarlige = minVagtansvarlige;
+    }
+
+    public void setForbeholdsliste(ArrayList<Forbehold> forbeholdsliste) {
+        this.forbeholdsliste = forbeholdsliste;
+    }
 
     public Medarbejder(){
 
     }
-    public Medarbejder(String username, String password, String name, String initialer, String telefonnummer, int visIVagtplan, int medarbejderStatus, String uselog, int erVagtansvarlig, String minVagtansvarlige, ArrayList<Forbehold> forbeholdsliste) {
+
+    public Medarbejder(String username, String password, String role, String name, String initialer, String telefonnummer, String visIVagtplan, int medarbejderStatus, String uselog, String minVagtansvarlige, ArrayList<Forbehold> forbeholdsliste) {
         this.username = username;
         this.password = password;
+        this.role = role;
         this.name = name;
         this.initialer = initialer;
         this.telefonnummer = telefonnummer;
-        this.visIVagtplan = visIVagtplan;
+        this.visivagtplan = visIVagtplan;
         this.medarbejderStatus = medarbejderStatus;
         this.uselog = uselog;
-        this.erVagtansvarlig = erVagtansvarlig;
         this.minVagtansvarlige = minVagtansvarlige;
         this.forbeholdsliste = forbeholdsliste;
     }
 
-    public Medarbejder(String username, String password, String name, String initialer, String telefonnummer, int visIVagtplan, int medarbejderStatus, String uselog, int erVagtansvarlig, String minVagtansvarlige) {
+    public Medarbejder(String username, String password, String name, String initialer, String telefonnummer, String visIVagtplan,
+                       int medarbejderStatus, String uselog, String minVagtansvarlige, ArrayList<Forbehold> forbeholdsliste) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.initialer = initialer;
         this.telefonnummer = telefonnummer;
-        this.visIVagtplan = visIVagtplan;
+        this.visivagtplan = visIVagtplan;
         this.medarbejderStatus = medarbejderStatus;
         this.uselog = uselog;
-        this.erVagtansvarlig = erVagtansvarlig;
         this.minVagtansvarlige = minVagtansvarlige;
     }
 
@@ -59,7 +78,7 @@ public class Medarbejder {
         this.name = name;
         this.initialer = initialer;
         this.telefonnummer = telefonnummer;
-        this.visIVagtplan = 1;
+        this.visivagtplan = "";
         this.medarbejderStatus = 1;
 
         this.minVagtansvarlige = minVagtansvarlige;
@@ -71,7 +90,7 @@ public class Medarbejder {
         this.name = "";
         this.initialer = "";
         this.telefonnummer = "";
-        this.visIVagtplan = 1;
+        this.visivagtplan = "";
         this.medarbejderStatus = 1;
 
         this.minVagtansvarlige = minVagtansvarlige;
@@ -146,12 +165,12 @@ public class Medarbejder {
         this.telefonnummer = telefonnummer;
     }
 
-    public int getVisIVagtplan() {
-        return visIVagtplan;
+    public String getVisIVagtplan() {
+        return visivagtplan;
     }
 
-    public void setVisIVagtplan(int visIVagtplan) {
-        this.visIVagtplan = visIVagtplan;
+    public void setVisIVagtplan(String visIVagtplan) {
+        this.visivagtplan = visIVagtplan;
     }
 
     public int getMedarbejderStatus() {
@@ -170,19 +189,19 @@ public class Medarbejder {
         this.uselog = uselog;
     }
 
-    @Override
-    public String toString(){
-        String tekstIVagtplan = username;
-
-        switch (visIVagtplan){
-            case 0: tekstIVagtplan = username;
-            break;
-            case 1: tekstIVagtplan = name;
-            break;
-            case 2: tekstIVagtplan = initialer;
-            break;
-
-        }
-        return tekstIVagtplan;
-    }
+//    @Override
+//    public String toString(){
+//        String tekstIVagtplan = username;
+//
+//        switch (visIVagtplan){
+//            case 0: tekstIVagtplan = username;
+//            break;
+//            case 1: tekstIVagtplan = name;
+//            break;
+//            case 2: tekstIVagtplan = initialer;
+//            break;
+//
+//        }
+//        return tekstIVagtplan;
+//    }
 }

@@ -7,27 +7,34 @@
 </head>
 <body>
 <div class="container">
-
-
-
     <h1>Personale</h1>
-
     <table>
         <thead>
         <tr>
             <th>username</th>
-            <th>name</th>
-            <th>initialer</th>
-            <th>telefonnummer</th>
+            <th>password</th>
+            <th>role</th>
+            <th>navn</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
             <th></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="medarbejder : ${medarbejderliste}">
             <td th:text="${medarbejder.username}"></td>
+            <td th:text="${medarbejder.password}"></td>
+            <td th:text="${medarbejder.role}"></td>
             <td th:text="${medarbejder.name}"></td>
             <td th:text="${medarbejder.initialer}"></td>
             <td th:text="${medarbejder.telefonnummer}"></td>
+            <!--<td th:text="${medarbejder.visivagtplan}"></td>-->
+            <!--<td th:text="${medarbejder.uselog}"></td>-->
+            <!--<td th:text="${medarbejder.vagtansvarlig}"></td>-->
+            <!--<td th:text="${medarbejder.username}"></td>-->
             <td></td>
         </tr>
 

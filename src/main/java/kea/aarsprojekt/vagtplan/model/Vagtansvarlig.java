@@ -15,13 +15,42 @@ public class Vagtansvarlig extends Medarbejder{
     @Autowired
     VagtplanController vagtplanController;
 
-    @Autowired
-    public Vagtansvarlig(String username, String password, String name, String initialer, String telefonnummer, int visIVagtplan, int medarbejderStatus, String uselog, int ervagtansvarlig, ArrayList<Medarbejder> medarbejderListe, ArrayList<Vagtbehov> vagtbehovsliste, ArrayList<Vagtplan> vagtplansliste) {
-        super(username, password, name, initialer, telefonnummer, visIVagtplan, medarbejderStatus, uselog, ervagtansvarlig, username);
+
+    public Vagtansvarlig(ArrayList<Medarbejder> medarbejderListe, ArrayList<Vagtbehov> vagtbehovsListe, ArrayList<Vagtplan> vagtplansListe) {
         this.medarbejderListe = medarbejderListe;
-        this.vagtbehovsListe = vagtbehovsliste;
-        this.vagtplansListe = vagtplansliste;
+        this.vagtbehovsListe = vagtbehovsListe;
+        this.vagtplansListe = vagtplansListe;
     }
+
+    public Vagtansvarlig(String username, String password, String role, String name, String initialer, String telefonnummer, String visIVagtplan, int medarbejderStatus, String uselog, String minVagtansvarlige, ArrayList<Forbehold> forbeholdsliste, ArrayList<Medarbejder> medarbejderListe, ArrayList<Vagtbehov> vagtbehovsListe, ArrayList<Vagtplan> vagtplansListe) {
+        super(username, password, role, name, initialer, telefonnummer, visIVagtplan, medarbejderStatus, uselog, minVagtansvarlige, forbeholdsliste);
+        this.medarbejderListe = medarbejderListe;
+        this.vagtbehovsListe = vagtbehovsListe;
+        this.vagtplansListe = vagtplansListe;
+    }
+
+    public Vagtansvarlig(String username, String password, String name, String initialer, String telefonnummer, String visIVagtplan, int medarbejderStatus, String uselog, String minVagtansvarlige, ArrayList<Forbehold> forbeholdsliste, ArrayList<Medarbejder> medarbejderListe, ArrayList<Vagtbehov> vagtbehovsListe, ArrayList<Vagtplan> vagtplansListe) {
+        super(username, password, name, initialer, telefonnummer, visIVagtplan, medarbejderStatus, uselog, minVagtansvarlige, forbeholdsliste);
+        this.medarbejderListe = medarbejderListe;
+        this.vagtbehovsListe = vagtbehovsListe;
+        this.vagtplansListe = vagtplansListe;
+    }
+
+    public Vagtansvarlig(String username, String password, String minVagtansvarlige, ArrayList<Medarbejder> medarbejderListe, ArrayList<Vagtbehov> vagtbehovsListe, ArrayList<Vagtplan> vagtplansListe) {
+        super(username, password, minVagtansvarlige);
+        this.medarbejderListe = medarbejderListe;
+        this.vagtbehovsListe = vagtbehovsListe;
+        this.vagtplansListe = vagtplansListe;
+    }
+
+    public Vagtansvarlig(String username, ArrayList<Medarbejder> medarbejderListe, ArrayList<Vagtbehov> vagtbehovsListe, ArrayList<Vagtplan> vagtplansListe) {
+        super(username);
+        this.medarbejderListe = medarbejderListe;
+        this.vagtbehovsListe = vagtbehovsListe;
+        this.vagtplansListe = vagtplansListe;
+    }
+
+    @Autowired
 
     public Medarbejder opretMedarbejder(String username){// TODO: 12-05-2018
 
@@ -37,7 +66,7 @@ public class Vagtansvarlig extends Medarbejder{
         }
 
 
-        public Medarbejder getMedarbejder(String username){
+    public Medarbejder getMedarbejder(String username){
             Medarbejder medarbejder_holder = null;
             for (Medarbejder medarbejder:medarbejderListe) {
                 if(medarbejder.getUsername().equalsIgnoreCase(username))
@@ -46,6 +75,7 @@ public class Vagtansvarlig extends Medarbejder{
             return medarbejder_holder;
         }
 
+    @Autowired
     public ArrayList<Medarbejder> seMedarbejderListe(){// TODO: 12-05-2018
         return medarbejderListe;
         }
