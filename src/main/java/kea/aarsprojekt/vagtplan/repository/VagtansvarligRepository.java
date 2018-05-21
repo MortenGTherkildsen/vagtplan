@@ -25,30 +25,30 @@ public class VagtansvarligRepository extends MedarbejderRepository implements IV
     //*******************************************
     @Override
     public ArrayList<Medarbejder> visMedarbejderListe(){
-        ArrayList<Medarbejder> medarbejderListe = new ArrayList<>();
+        ArrayList<Medarbejder> medarbejderliste = new ArrayList<>();
 
         String sql = "SELECT * FROM vagtplantestdb.medarbejdere";
         sqlRowSet = jdbcTemplate.queryForRowSet(sql);
 
         while (sqlRowSet.next()) {
                 ArrayList<Forbehold> forbeholdsliste = new ArrayList<>();
-                String sql_forbehold = "SELECT * FROM vagtplantestdb.forbehold";
-                sqlRowSet2 = jdbcTemplate.queryForRowSet(sql_forbehold);
+//                String sql_forbehold = "SELECT * FROM vagtplantestdb.forbehold";
+//                sqlRowSet2 = jdbcTemplate.queryForRowSet(sql_forbehold);
 
-                medarbejderListe.add(new Medarbejder(sqlRowSet.getString("username"),
+            medarbejderliste.add(new Medarbejder(sqlRowSet.getString("username"),
                     sqlRowSet.getString("password"),
+                    sqlRowSet.getString("role"),
                     sqlRowSet.getString("navn"),
                     sqlRowSet.getString("initialer"),
                     sqlRowSet.getString("telefonnummer"),
-                    sqlRowSet.getInt("visivagtplan"),
+                    sqlRowSet.getString("visivagtplan"),
                     sqlRowSet.getInt("medarbejderstatus"),
                     sqlRowSet.getString("uselog"),
-                    sqlRowSet.getInt("ervagtansvarlig"),
-                    sqlRowSet.getString("vagtansvarligsemail"))
+                    sqlRowSet.getString("vagtansvarligsemail"), forbeholdsliste)
                 );
         }
 
-        return medarbejderListe;
+        return medarbejderliste;
     }
 
     @Override

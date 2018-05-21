@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 public class Forbehold {
 
+    //testkommentar
     private LocalDateTime fra;
     private LocalDateTime til;
 
