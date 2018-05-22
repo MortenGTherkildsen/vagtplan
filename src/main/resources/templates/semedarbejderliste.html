@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="container">
+<div class="container1">
     <h1>Personale</h1>
     <table>
         <thead>
@@ -15,11 +15,8 @@
             <th>password</th>
             <th>role</th>
             <th>navn</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th>intilaler</th>
+            <th>Tlf</th>
             <th></th>
         </tr>
         </thead>
@@ -31,14 +28,10 @@
             <td th:text="${medarbejder.name}"></td>
             <td th:text="${medarbejder.initialer}"></td>
             <td th:text="${medarbejder.telefonnummer}"></td>
-            <!--<td th:text="${medarbejder.visivagtplan}"></td>-->
-            <!--<td th:text="${medarbejder.uselog}"></td>-->
-            <!--<td th:text="${medarbejder.vagtansvarlig}"></td>-->
-            <!--<td th:text="${medarbejder.username}"></td>-->
-            <td><a th:href="${'/semedarbejder?id='+medarbejder.username}" class="btn">Details</a>
-                 <a href="/semedarbejdersforbeholdsliste" class="btn">Se Forbeholdsliste</a>
-                <a href="/opretforbehold" class="btn">Opret Forbehold</a>
-                <a href="/deletemedarbejder" class="btn">Slet Medarbejder</a>
+            <td><a th:href="${'/semedarbejder?username='+medarbejder.username}" class="btn btn-details">Details</a>
+                 <a href="/semedarbejdersforbeholdsliste" class="btn btn-ed">Se Forbeholdsliste</a>
+                <a href="/opretforbehold" class="btn btn">Opret Forbehold</a>
+                <a href="/deletemedarbejder" class="btn btn-del">Slet Medarbejder</a>
 
             </td>
         </tr>
@@ -46,7 +39,7 @@
         </tbody>
 
     </table>
-    <a href="/create" class="btn">Create</a>
+    <a href="/opretmedarbejder" class="btn">Create</a>
 
 </div>
 </body>

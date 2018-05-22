@@ -71,7 +71,7 @@ public class VagtansvarligRepository extends MedarbejderRepository implements IV
     @Override
     public Medarbejder getMedarbejder(String username){
 
-        String sql = "SELECT * FROM vagtplantestdb.medarbejdere WHERE username=" + username;
+        String sql = "SELECT * FROM vagtplantestdb.medarbejdere WHERE username='"+  username +"'";
         sqlRowSet = jdbcTemplate.queryForRowSet(sql);
 
         ArrayList<Forbehold> forbeholdsliste = new ArrayList<>();
