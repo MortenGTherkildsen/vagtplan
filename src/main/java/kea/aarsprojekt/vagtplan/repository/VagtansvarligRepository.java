@@ -91,14 +91,15 @@ public class VagtansvarligRepository extends MedarbejderRepository implements IV
     }
 
     @Override
-    public void opdaterMedarbejder(String username, String navn, String initialer, String telefonnummer, String visivagtplan, int medarbejderstatus, String uselog){
+    public void opdaterMedarbejder(Medarbejder medarbejder){
 
-        String sql = "UPDATE vagtplantestdb.medarbejdere SET navn="
-                + navn + ", initialer=" + initialer + ", telefonnummer="
-                + telefonnummer + ", visivagtplan=" + visivagtplan
-                + ", medarbejderstatus=" + medarbejderstatus + ", uselog="
-                + uselog + " WHERE username=" + username;
-        Medarbejder medarbejder = getMedarbejder(username);
+        jdbcTemplate.update("UPDATE vagtplantestdb.medarbejdere SET " +
+                "navn ='" + medarbejder.getName() + "' , "+
+                "initialer='" + medarbejder.getInitialer() +"' , "+
+                "telefonnummer ='" +medarbejder.getTelefonnummer()+"' , "+
+                "visivagtplan ='" +medarbejder.getVisIVagtplan() + "' , "+
+                "uselog ='" + medarbejder.getUselog() + "' , "+
+                "' WHERE username = '" + medarbejder.getUsername()+"'");
 
     }
 
