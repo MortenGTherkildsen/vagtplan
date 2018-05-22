@@ -129,7 +129,7 @@ public class VagtansvarligController extends MedarbejderController {
     @GetMapping("/updatemedarbejder")
     public String update(@RequestParam("username") String username, Model model) {
         Medarbejder medarbejder = vagtansvarligRepository.getMedarbejder(username);
-        model.addAttribute("Medarbejder", medarbejder);
+        model.addAttribute("medarbejder", medarbejder);
         return "updatemedarbejder";
     }
 
