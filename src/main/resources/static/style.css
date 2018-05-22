@@ -1,5 +1,6 @@
 body {
     font-family: arial, sans-serif;
+    font-size: 10px;
     margin: 0;
     padding: 0;
 }
@@ -7,6 +8,7 @@ body {
 .container {
     text-align: center;
     width: 80%;
+    font-size: 12px;
     margin: 0 auto;
 }
 nav {
@@ -75,12 +77,12 @@ input {
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
-    padding: 7px 10px;
+    padding: 2px 3px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 12px;
-    border-radius: 5px; /* https://www.w3schools.com/css/css3_borders.asp */
+    font-size: 9px;
+    border-radius: 2px; /* https://www.w3schools.com/css/css3_borders.asp */
     box-shadow: 1px 1px 1px #888888;
     -webkit-transition-duration: 0.1s; /* Safari */
     transition-duration: 0.1s;

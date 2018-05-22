@@ -99,9 +99,9 @@ public class Vagtansvarlig extends Medarbejder{
     public void sletVagtbehov(){// TODO: 12-05-2018
         }
 
-    public void opretVagtplan(LocalDateTime fra, LocalDateTime til, ArrayList<Vagtbehov> vagtbehovsliste, ArrayList<Medarbejder> medarbejdere){
+    public void opretVagtplan(int nytID, LocalDateTime fra, LocalDateTime til, ArrayList<Vagtbehov> vagtbehovsliste, ArrayList<Medarbejder> medarbejdere){
 
-        vagtplanController.opretVagtplan(fra, til, vagtbehovsliste, medarbejdere);
+//        vagtplanController.opretVagtplan(nytID, fra, til, vagtbehovsliste, medarbejdere);
         }
 
     public void seVagtplansliste(){// TODO: 12-05-2018

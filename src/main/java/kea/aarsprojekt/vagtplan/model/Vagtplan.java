@@ -1,42 +1,45 @@
 package kea.aarsprojekt.vagtplan.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Vagtplan {
 
-    String titel;
-    String oprettetAf;
-    LocalDateTime fra;
-    LocalDateTime til;
-    boolean endeligVagtplan;
+    private int id;
+    private String titel;
+    private Date fra;
+    private Date til;
+    private String kommentar;
 
-    ArrayList<Vagt> vagts;
+    private ArrayList<Vagt> vagts;
 
-    public void accepterVagtplan(){
-        this.endeligVagtplan = true;
-    }
-
-    public Vagtplan(){
-        this.endeligVagtplan = false;
-        this.oprettetAf = ", d. " + LocalDateTime.now().toString();
-    }
-
-    public Vagtplan(String titel, String oprettetAf, LocalDateTime fra, LocalDateTime til, boolean endeligVagtplan, ArrayList<Vagt> vagts) {
+    public Vagtplan(int id, String titel, Date fra, Date til, String kommentar, ArrayList<Vagt> vagts) {
+        this.id = id;
         this.titel = titel;
-        this.oprettetAf = oprettetAf;
         this.fra = fra;
         this.til = til;
-        this.endeligVagtplan = endeligVagtplan;
+        this.kommentar = kommentar;
         this.vagts = vagts;
     }
 
-    public void addVagt(Vagt vagt){
-        vagts.add(vagt);
+    public Vagtplan(int id){
+        this.id = id;
+        this.titel = "";
+        this.fra = null;
+        this.til = null;
+        this.kommentar = "";
+        this.vagts = new ArrayList<Vagt>();
+    }
+    public int getId() {
+        return id;
     }
 
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTitel() {
         return titel;
@@ -46,36 +49,28 @@ public class Vagtplan {
         this.titel = titel;
     }
 
-    public String getOprettetAf() {
-        return oprettetAf;
-    }
-
-    public void setOprettetAf(String oprettetAf) {
-        this.oprettetAf = oprettetAf;
-    }
-
-    public LocalDateTime getFra() {
+    public Date getFra() {
         return fra;
     }
 
-    public void setFra(LocalDateTime fra) {
+    public void setFra(Date fra) {
         this.fra = fra;
     }
 
-    public LocalDateTime getTil() {
+    public Date getTil() {
         return til;
     }
 
-    public void setTil(LocalDateTime til) {
+    public void setTil(Date til) {
         this.til = til;
     }
 
-    public boolean isEndeligVagtplan() {
-        return endeligVagtplan;
+    public String getKommentar() {
+        return kommentar;
     }
 
-    public void setEndeligVagtplan(boolean endeligVagtplan) {
-        this.endeligVagtplan = endeligVagtplan;
+    public void setKommentar(String kommentar) {
+        this.kommentar = kommentar;
     }
 
     public ArrayList<Vagt> getVagts() {

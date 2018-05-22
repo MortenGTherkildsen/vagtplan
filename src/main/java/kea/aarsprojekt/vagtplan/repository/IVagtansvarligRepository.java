@@ -16,13 +16,12 @@ public interface IVagtansvarligRepository extends IMedarbejderRepository{
     ArrayList<Medarbejder> visMedarbejderListe();
     void opretMedarbejder(String username);
     void opretMedarbejder(Medarbejder medarbejder);
-    void opdaterMedarbejder(Medarbejder medarbejder);
-     ArrayList<Vagtbehov> visVagtbehovsListe();
+    void opdaterMedarbejder(String username, String navn, String initialer, String telefonnummer, String visivagtplan, int medarbejderstatus, String uselog);
+    ArrayList<Vagtbehov> visVagtbehovsListe();
     void opretVagtbehov(Vagtbehov vagtbehov);
     void redigerVagtbehov(Vagtbehov vagtbehov);
-    // void seVagtbehov(Vagtbehov vagtbehov); Morten: Mener den er overflødig pga "inline-edit" funktionalitet
     ArrayList<Vagtplan> visVagtplansListe();
-    Vagtplan visVagtplan();
+    Vagtplan visVagtplan(int id);
     ArrayList<Vagtplan> opretVagtplan(Vagtplan vagtplan);
     Medarbejder getMedarbejder(String username);
 

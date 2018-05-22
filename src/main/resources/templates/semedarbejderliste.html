@@ -35,7 +35,12 @@
             <!--<td th:text="${medarbejder.uselog}"></td>-->
             <!--<td th:text="${medarbejder.vagtansvarlig}"></td>-->
             <!--<td th:text="${medarbejder.username}"></td>-->
-            <td></td>
+            <td><a th:href="${'/semedarbejder?id='+medarbejder.username}" class="btn">Details</a>
+                 <a href="/semedarbejdersforbeholdsliste" class="btn">Se Forbeholdsliste</a>
+                <a href="/opretforbehold" class="btn">Opret Forbehold</a>
+                <a href="/deletemedarbejder" class="btn">Slet Medarbejder</a>
+
+            </td>
         </tr>
 
         </tbody>

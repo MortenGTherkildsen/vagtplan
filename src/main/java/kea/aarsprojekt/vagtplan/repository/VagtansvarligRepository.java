@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @Repository
@@ -59,12 +60,12 @@ public class VagtansvarligRepository extends MedarbejderRepository implements IV
         jdbcTemplate.execute(sql);
     }
 
+    @Override
     public void opretMedarbejder(Medarbejder medarbejder){
 
         String sql= "INSERT INTO medarbejdere(username) VALUES ("+ medarbejder.getUsername() + "); SELECT LAST_INSERT_ID();";
 
         jdbcTemplate.execute(sql);
-
     }
 
     @Override
@@ -90,7 +91,14 @@ public class VagtansvarligRepository extends MedarbejderRepository implements IV
     }
 
     @Override
-    public void opdaterMedarbejder(Medarbejder medarbejder){
+    public void opdaterMedarbejder(String username, String navn, String initialer, String telefonnummer, String visivagtplan, int medarbejderstatus, String uselog){
+
+        String sql = "UPDATE vagtplantestdb.medarbejdere SET navn="
+                + navn + ", initialer=" + initialer + ", telefonnummer="
+                + telefonnummer + ", visivagtplan=" + visivagtplan
+                + ", medarbejderstatus=" + medarbejderstatus + ", uselog="
+                + uselog + " WHERE username=" + username;
+        Medarbejder medarbejder = getMedarbejder(username);
 
     }
 
@@ -122,12 +130,21 @@ public class VagtansvarligRepository extends MedarbejderRepository implements IV
     @Override
     public ArrayList<Vagtplan> visVagtplansListe(){
         ArrayList<Vagtplan> vagtplansListe = new ArrayList<>();
+        ArrayList<Vagt> vagtliste = new ArrayList<>();
 
-        String sql = "SELECT * FROM vagtplantestdb.vagtplan";
+        String sql = "SELECT * FROM vagtplantestdb.vagtplaner";
         sqlRowSet = jdbcTemplate.queryForRowSet(sql);
 
-        while (sqlRowSet.next()) {
 
+        while (sqlRowSet.next()){
+            vagtplansListe.add(new Vagtplan(
+                    sqlRowSet.getInt("id"),
+                    sqlRowSet.getString("titel"),
+                    sqlRowSet.getDate("fra"),
+                    sqlRowSet.getDate("til"),
+                    sqlRowSet.getString("kommentar"),
+                    vagtliste
+            ));
         }
         return vagtplansListe;
     }
@@ -141,11 +158,11 @@ public class VagtansvarligRepository extends MedarbejderRepository implements IV
     }
 
     @Override
-    public Vagtplan visVagtplan(){
+    public Vagtplan visVagtplan(int id){
 
-        Vagtplan vagtplan = new Vagtplan();
         //Populér hele den store vagtplan for alle medarbejdere med sql-statements.
 
+        Vagtplan vagtplan = new Vagtplan(id);
         return vagtplan;
     }
 

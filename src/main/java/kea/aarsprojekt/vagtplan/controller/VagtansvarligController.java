@@ -32,18 +32,19 @@ public class VagtansvarligController extends MedarbejderController {
     @GetMapping("/semedarbejderliste")
     public String medarbejderliste(Model model){
         model.addAttribute("medarbejderliste", vagtansvarligRepository.visMedarbejderListe());
+
         return "semedarbejderliste";
     }
 
     @PostMapping("/semedarbejderliste")
-    public String medarbejderliste(@RequestParam("username") String user, Medarbejder medarbejder){
+    public String medarbejderliste(@RequestParam("username") String user, Model model){
         vagtansvarligRepository.opretMedarbejder(user);
         return "redirect:/semedarbejderliste";
     }
 
     @GetMapping("/semedarbejder")
     public String semedarbejder(@RequestParam("username") String username, Model model){
-        model.addAttribute("medarbejder", vagtansvarligRepository.getMedarbejder(username));
+        model.addAttribute("/semedarbejder?id="+username, vagtansvarligRepository.getMedarbejder(username));
 
         return "semedarbejder";
     }
@@ -66,8 +67,8 @@ public class VagtansvarligController extends MedarbejderController {
     }
 
     @GetMapping("/vagtplan")
-    public String vagtplan(Model model){
-        model.addAttribute("vagtplan", vagtansvarligRepository.visVagtplan());
+    public String vagtplan(@RequestParam("id") int idv, Model model){
+        model.addAttribute("/vagtplan="+idv, vagtansvarligRepository.visVagtplan(idv));
         return "vagtplan";
     }
 
