@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class VagtansvarligRepository extends MedarbejderRepository implements IVagtansvarligRepository, IMedarbejderRepository{
@@ -60,53 +61,47 @@ public class VagtansvarligRepository extends MedarbejderRepository implements IV
         jdbcTemplate.execute(sql);
     }
 
-    void opretMedarbejder(String username1, String password, String navn, String initialer, String telefonnummer, String visivagtplan);
-
     @Override
-    public void opretMedarbejder(String username1, String password1, String navn1, String initialer1, String telefonnummer1, String visivagtplan1)){
+    public void opretMedarbejder(Medarbejder medarbejder){
 
-        String sql= "INSERT INTO medarbejdere(username, password, role, navn, initialer, telefonnummer, visivagtplan, medarbejderstatus, vagtansvarligsemail) " +
-                "VALUES (username1, password1, medarbejder, "); SELECT LAST_INSERT_ID();";
+        String sql= "INSERT INTO medarbejdere(username) VALUES ("+ medarbejder.getUsername() + "); SELECT LAST_INSERT_ID();";
 
         jdbcTemplate.execute(sql);
     }
 
     @Override
     public Medarbejder getMedarbejder(String username){
-
-<<<<<<< Updated upstream
-        String sql = "SELECT * FROM vagtplantestdb.medarbejdere WHERE username='"+  username +"'";
-=======
-        String sql = "SELECT * FROM vagtplantestdb.medarbejdere WHERE username='" + username + "'";
->>>>>>> Stashed changes
+        ArrayList<Medarbejder> medarbejderList = new ArrayList<>();
+        ArrayList<Forbehold> forbeholdList = new ArrayList<>();
+        String sql = "SELECT * FROM vagtplantestdb.medarbejdere WHERE username='"+username+"'";
         sqlRowSet = jdbcTemplate.queryForRowSet(sql);
 
-        ArrayList<Forbehold> forbeholdsliste = new ArrayList<>();
-
-        Medarbejder medarbejder = new Medarbejder(sqlRowSet.getString("username"),
-                sqlRowSet.getString("password"),
-                sqlRowSet.getString("role"),
-                sqlRowSet.getString("navn"),
-                sqlRowSet.getString("initialer"),
-                sqlRowSet.getString("telefonnummer"),
-                sqlRowSet.getString("visivagtplan"),
-                sqlRowSet.getInt("medarbejderstatus"),
-                sqlRowSet.getString("uselog"),
-                sqlRowSet.getString("vagtansvarligsemail"), forbeholdsliste);
-
-        return medarbejder;
+        while (sqlRowSet.next()) {
+            return  new Medarbejder(sqlRowSet.getString("username"),
+                    sqlRowSet.getString("password"),
+                    sqlRowSet.getString("role"),
+                    sqlRowSet.getString("navn"),
+                    sqlRowSet.getString("initialer"),
+                    sqlRowSet.getString("telefonnummer"),
+                    sqlRowSet.getString("visivagtplan"),
+                    sqlRowSet.getInt("medarbejderstatus"),
+                    sqlRowSet.getString("uselog"),
+                    sqlRowSet.getString("vagtansvarligsemail"),
+                    forbeholdList);
+        }
+        return null;
     }
 
     @Override
     public void opdaterMedarbejder(Medarbejder medarbejder){
 
-        jdbcTemplate.update("UPDATE vagtplantestdb.medarbejdere SET " +
-                "navn ='" + medarbejder.getName() + "' , "+
-                "initialer='" + medarbejder.getInitialer() +"' , "+
-                "telefonnummer ='" +medarbejder.getTelefonnummer()+"' , "+
-                "visivagtplan ='" +medarbejder.getVisIVagtplan() + "' , "+
-                "uselog ='" + medarbejder.getUselog() + "' , "+
-                "' WHERE username = '" + medarbejder.getUsername()+"'");
+        jdbcTemplate.update("UPDATE vagtplantestdb.medarbejdere SET "
+                +"navn ='" + medarbejder.getName() + "' , "
+                +"initialer='" + medarbejder.getInitialer() +"' , "
+                +"telefonnummer ='" +medarbejder.getTelefonnummer()+"' , "
+                +"visivagtplan ='" +medarbejder.getVisIVagtplan() + "' , "
+                +"uselog ='" + medarbejder.getUselog()
+                +"' WHERE username = '" + medarbejder.getUsername()+"'");
 
     }
 
