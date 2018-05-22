@@ -28,7 +28,7 @@
             <td th:text="${medarbejder.name}"></td>
             <td th:text="${medarbejder.initialer}"></td>
             <td th:text="${medarbejder.telefonnummer}"></td>
-            <td><a th:href="${'/semedarbejder?username='+medarbejder.username}" class="btn btn-details">Details</a>
+            <td><a th:href="${'/updatemedarbejder?username='+medarbejder.username}" class="btn btn-details">Details</a>
                  <a href="/semedarbejdersforbeholdsliste" class="btn btn-ed">Se Forbeholdsliste</a>
                 <a href="/opretforbehold" class="btn btn">Opret Forbehold</a>
                 <a href="/deletemedarbejder" class="btn btn-del">Slet Medarbejder</a>

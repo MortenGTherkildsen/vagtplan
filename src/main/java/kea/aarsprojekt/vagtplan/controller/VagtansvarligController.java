@@ -3,7 +3,6 @@ package kea.aarsprojekt.vagtplan.controller;
 import kea.aarsprojekt.vagtplan.model.Medarbejder;
 import kea.aarsprojekt.vagtplan.model.Vagtbehov;
 import kea.aarsprojekt.vagtplan.model.Vagtplan;
-import kea.aarsprojekt.vagtplan.repository.IMedarbejderRepository;
 import kea.aarsprojekt.vagtplan.repository.IVagtansvarligRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -127,11 +126,17 @@ public class VagtansvarligController extends MedarbejderController {
         vagtansvarligRepository.opretMedarbejder(medarbejder);
         return "redirect:/semedarbejderliste";
     }
-    @GetMapping("/semedarbejder")
-    public String details(@RequestParam("username") String username,Model model) {
-       model.addAttribute("medarbejder",vagtansvarligRepository.getMedarbejder(username));
+    @GetMapping("/updatemedarbejder")
+    public String update(@RequestParam("username") String username, Model model) {
+        Medarbejder medarbejder = vagtansvarligRepository.getMedarbejder(username);
+        model.addAttribute("Medarbejder", medarbejder);
+        return "updatemedarbejder";
+    }
 
-        return "semedarbejder";
+    @PostMapping("/updatemedarbejder")
+    public String update(@ModelAttribute Medarbejder medarbejder) {
+        vagtansvarligRepository.opdaterMedarbejder(medarbejder);
+        return "redirect:/semedarbejderliste";
     }
 
 

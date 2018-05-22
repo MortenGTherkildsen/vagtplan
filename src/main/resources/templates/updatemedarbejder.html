@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Update</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Update Student</h1>
+
+    <form action="/updatemedarbejder" method="post">
+        <input type="text" th:value="${medarbejder.username}"name="username">
+
+        <label for="">password</label><br>
+        <input type="text"name="password"th:value="$medarbejder.password}">
+
+        <br>
+        <label for="">Name</label><br>
+        <input type="text"name="name"th:value="${medarbejder.name}">
+        <br>
+
+        <label for="">Intialer</label><br>
+        <input type="text"name="initialer"th:value="${medarbejder.initialer}">
+        <br>
+
+        <label for="">Telefonnummer</label><br>
+        <input type="text"name="telefonnummer"th:value="${medarbejder.telefonnummer}">
+        <br>
+
+        <input type="submit"class="btn btn-create" value="updatemedarbejder">
+
+    </form>
+
+</div>
+</body>
+</html>
