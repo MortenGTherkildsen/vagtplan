@@ -15,7 +15,7 @@ public interface IVagtansvarligRepository extends IMedarbejderRepository{
     void readAll();
     ArrayList<Medarbejder> visMedarbejderListe();
     void opretMedarbejder(String username);
-    void opretMedarbejder(Medarbejder medarbejder);
+    void opretMedarbejder(String username, String password, String navn, String initialer, String telefonnummer, String visivagtplan);
     void opdaterMedarbejder(String username, String navn, String initialer, String telefonnummer, String visivagtplan, int medarbejderstatus, String uselog);
     ArrayList<Vagtbehov> visVagtbehovsListe();
     void opretVagtbehov(Vagtbehov vagtbehov);
