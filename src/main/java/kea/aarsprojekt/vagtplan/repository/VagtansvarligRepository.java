@@ -63,10 +63,10 @@ public class VagtansvarligRepository extends MedarbejderRepository implements IV
     void opretMedarbejder(String username1, String password, String navn, String initialer, String telefonnummer, String visivagtplan);
 
     @Override
-    public void opretMedarbejder(String username1, String password1, String navn1, String initialer1, String telefonnummer1, String visivagtplan1)){
+    public void opretMedarbejder(String username1, String password1, String navn1, String initialer1, String telefonnummer1, String visivagtplan1){
 
         String sql= "INSERT INTO medarbejdere(username, password, role, navn, initialer, telefonnummer, visivagtplan, medarbejderstatus, vagtansvarligsemail) " +
-                "VALUES (username1, password1, medarbejder, "); SELECT LAST_INSERT_ID();";
+                "VALUES (" + username1 + ", " + password1 + ", " + navn1 + ", " + initialer1 + ", " + telefonnummer1 + ", " + visivagtplan1 + ")";
 
         jdbcTemplate.execute(sql);
     }
@@ -74,11 +74,8 @@ public class VagtansvarligRepository extends MedarbejderRepository implements IV
     @Override
     public Medarbejder getMedarbejder(String username){
 
-<<<<<<< Updated upstream
-        String sql = "SELECT * FROM vagtplantestdb.medarbejdere WHERE username='"+  username +"'";
-=======
         String sql = "SELECT * FROM vagtplantestdb.medarbejdere WHERE username='" + username + "'";
->>>>>>> Stashed changes
+
         sqlRowSet = jdbcTemplate.queryForRowSet(sql);
 
         ArrayList<Forbehold> forbeholdsliste = new ArrayList<>();
