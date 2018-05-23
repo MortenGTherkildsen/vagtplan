@@ -14,19 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-public class VagtansvarligController extends MedarbejderController {
+public class VagtansvarligController {
 
 
 @Autowired
     private IVagtansvarligRepository vagtansvarligRepository;
-
-//    @GetMapping("/vagtansvarlig")
-//    public String index(Model model){
-//        model.addAttribute("vagtplanliste", vagtansvarligRepository.visVagtplansListe());
-//        model.addAttribute("medarbejderliste", vagtansvarligRepository.visMedarbejderListe());
-//        model.addAttribute("vagtbehovsliste", vagtansvarligRepository.visVagtbehovsListe());
-//        return "vagtansvarlig";
-//    }
 
     @GetMapping("/semedarbejderliste")
     public String medarbejderliste(Model model){
@@ -34,19 +26,6 @@ public class VagtansvarligController extends MedarbejderController {
 
         return "semedarbejderliste";
     }
-
-    @PostMapping("/semedarbejderliste")
-    public String medarbejderliste(@RequestParam("username") String user, Model model){
-        vagtansvarligRepository.opretMedarbejder(user);
-        return "redirect:/semedarbejderliste";
-    }
-
-    //@GetMapping("/semedarbejder")
-    //public String semedarbejder(@RequestParam("username") String username, Model model){
-        //model.addAttribute("/semedarbejder?id="+username, vagtansvarligRepository.getMedarbejder(username));
-
-      //  return "semedarbejder";
-    //}
 
     @GetMapping("/sevagtbehovsliste")
     public String vagtbehovsliste(Model model){
@@ -79,29 +58,35 @@ public class VagtansvarligController extends MedarbejderController {
 
     @GetMapping("vagtansvarlig")
     public String vagtansvarlig(Model model){
-
         return "vagtansvarlig";
     }
 
     @PostMapping("vagtansvarlig")
     public String vagtansvarligClick(Model model){
-
-
         return "redirect:/vagtansvarlig";
    }
 
 
-    @GetMapping("medarbejder")
-    public  String MedarbejderMenu(Model model) {
-
+    @GetMapping("/medarbejder")
+    public  String MedarbejderMenu(@RequestParam("username") String user, Model model) {
+        model.addAttribute("/medarbejder="+user,vagtansvarligRepository.getMedarbejder(user));
         return "medarbejder";
+    }
+
+    @GetMapping("/forbeholdsliste")
+    public String Forbeholdmenu (Model model){
+         model.addAttribute("forbeholdsliste", vagtansvarligRepository.seForbeholdsListe());
+        return "forbeholdsliste";
+    }
+
+    @GetMapping("forbeholdsliste")
+    public String seForbeholdsliste (@RequestParam("username") String username, Model model){
+        model.addAttribute("/forbeholdsliste_for_"+ username, vagtansvarligRepository.seForbeholdsListe(username));
+
+        return "forbeholdsliste";
 
     }
-    @GetMapping("opretforbehold")
-    public String Forbeholdmenu (Model model){
-        // model.addAttribute("forbehold",medarbejderRepository.seMineForbehold());
-        return "opretforbehold";
-    }
+
     @PostMapping("opretforbehold")
     public String Forbeholdmenu1 (Model model){
         return "opretforbehold";
@@ -110,8 +95,10 @@ public class VagtansvarligController extends MedarbejderController {
     public String Vagtbehov (Model model) {
         return "opretvagtbehov";
     }
+
     @PostMapping ("opretvagtbehov")
     public String Vagtbehovlist (Model model){
+
         return "redirect:/sevagtbehovsliste";
     }
 
@@ -125,12 +112,6 @@ public class VagtansvarligController extends MedarbejderController {
     public String getopret(@ModelAttribute Medarbejder medarbejder) {
         vagtansvarligRepository.opretMedarbejder(medarbejder);
         return "redirect:/semedarbejderliste";
-    }
-    @GetMapping("/updatemedarbejder")
-    public String update(@RequestParam("username") String username, Model model) {
-        Medarbejder medarbejder = vagtansvarligRepository.getMedarbejder(username);
-        model.addAttribute("medarbejder", medarbejder);
-        return "updatemedarbejder";
     }
 
     @PostMapping("/updatemedarbejder")

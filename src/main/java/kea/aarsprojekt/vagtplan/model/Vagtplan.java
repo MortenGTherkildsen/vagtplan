@@ -1,7 +1,10 @@
 package kea.aarsprojekt.vagtplan.model;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -9,13 +12,13 @@ public class Vagtplan {
 
     private int id;
     private String titel;
-    private Date fra;
-    private Date til;
+    private LocalDate fra;
+    private LocalDate til;
     private String kommentar;
 
     private ArrayList<Vagt> vagts;
 
-    public Vagtplan(int id, String titel, Date fra, Date til, String kommentar, ArrayList<Vagt> vagts) {
+    public Vagtplan(int id, String titel, LocalDate fra, LocalDate til, String kommentar, ArrayList<Vagt> vagts) {
         this.id = id;
         this.titel = titel;
         this.fra = fra;
@@ -24,18 +27,21 @@ public class Vagtplan {
         this.vagts = vagts;
     }
 
-    public Vagtplan(int id){
-        this.id = id;
-        this.titel = "";
-        this.fra = null;
-        this.til = null;
-        this.kommentar = "";
-        this.vagts = new ArrayList<Vagt>();
+//    public Vagtplan(int id){
+//        this.id = id;
+//        this.titel = "";
+//        this.fra = null;
+//        this.til = null;
+//        this.kommentar = "";
+//        this.vagts = new ArrayList<Vagt>();
+//    }
+//
+    public Vagtplan(){
+
     }
     public int getId() {
         return id;
     }
-
 
     public void setId(int id) {
         this.id = id;
@@ -49,19 +55,26 @@ public class Vagtplan {
         this.titel = titel;
     }
 
-    public Date getFra() {
+    public LocalDate getFra() {
         return fra;
     }
 
-    public void setFra(Date fra) {
+    public void setFra(LocalDate fra) {
         this.fra = fra;
     }
 
-    public Date getTil() {
+    public LocalDate getTil() {
         return til;
     }
 
-    public void setTil(Date til) {
+    public int getDuration(LocalDate til, LocalDate fra){
+
+        int duration = 5;
+
+        return duration;
+    }
+
+    public void setTil(LocalDate til) {
         this.til = til;
     }
 

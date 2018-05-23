@@ -6,20 +6,17 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 @Repository
-public class VagtansvarligRepository extends MedarbejderRepository implements IVagtansvarligRepository, IMedarbejderRepository{
+public class VagtansvarligRepository implements IVagtansvarligRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    SqlRowSet sqlRowSet, sqlRowSet2;
-
-    @Override
-    public void readAll(){
-
-    }
+    SqlRowSet sqlRowSet;
 
     //*******************************************
     //MEDARBEJDERE
@@ -52,23 +49,29 @@ public class VagtansvarligRepository extends MedarbejderRepository implements IV
         return medarbejderliste;
     }
 
-    @Override
-    public void opretMedarbejder(String user){
+//    @Override
+//    public void opretMedarbejder(String user){
+//
+//        String sql= "INSERT INTO medarbejdere(username) VALUES ("+ user + "); SELECT LAST_INSERT_ID();";
+//
+//        jdbcTemplate.execute(sql);
+//    }
 
-        String sql= "INSERT INTO medarbejdere(username) VALUES ("+ user + "); SELECT LAST_INSERT_ID();";
+    public void opretMedarbejder(Medarbejder medarbejder){
 
-        jdbcTemplate.execute(sql);
-    }
+        jdbcTemplate.update("INSERT INTO vagtplantestdb.medarbejdere " +
+                "(username, password, role, navn, initialer, telefonnummer, visivagtplan, medarbejderstatus, vagtansvarligsemail) " +
+                "VALUES ('" + medarbejder.getUsername() + "' , '" +
+                medarbejder.getPassword() + "' , '" +
+                medarbejder.getRole() + "' , '" +
+                medarbejder.getName() + "' , '"+
+                medarbejder.getInitialer() + "' , '" +
+                medarbejder.getTelefonnummer() + "' , '" +
+                medarbejder.getVisIVagtplan() + "' , '" +
+                medarbejder.getMedarbejderStatus() + "' , '" +
+                medarbejder.getUselog() + "' " +
+                " WHERE username = '" + medarbejder.getUsername() + "'");
 
-    void opretMedarbejder(String username1, String password, String navn, String initialer, String telefonnummer, String visivagtplan);
-
-    @Override
-    public void opretMedarbejder(String username1, String password1, String navn1, String initialer1, String telefonnummer1, String visivagtplan1){
-
-        String sql= "INSERT INTO medarbejdere(username, password, role, navn, initialer, telefonnummer, visivagtplan, medarbejderstatus, vagtansvarligsemail) " +
-                "VALUES (" + username1 + ", " + password1 + ", " + navn1 + ", " + initialer1 + ", " + telefonnummer1 + ", " + visivagtplan1 + ")";
-
-        jdbcTemplate.execute(sql);
     }
 
     @Override
@@ -95,18 +98,29 @@ public class VagtansvarligRepository extends MedarbejderRepository implements IV
     }
 
     @Override
-    public void opdaterMedarbejder(Medarbejder medarbejder){
+    public void opdaterMedarbejder(String username, String navn, String initialer, String telefonnummer, String visivagtplan, int medarbejderstatus, String uselog){
 
         jdbcTemplate.update("UPDATE vagtplantestdb.medarbejdere SET " +
-                "navn ='" + medarbejder.getName() + "' , "+
-                "initialer='" + medarbejder.getInitialer() +"' , "+
-                "telefonnummer ='" +medarbejder.getTelefonnummer()+"' , "+
-                "visivagtplan ='" +medarbejder.getVisIVagtplan() + "' , "+
-                "uselog ='" + medarbejder.getUselog() + "' , "+
-                "' WHERE username = '" + medarbejder.getUsername()+"'");
+                "navn ='" + navn + "', " +
+                "initialer='" + initialer +"', " +
+                "telefonnummer ='" + telefonnummer +"', " +
+                "visivagtplan ='" + visivagtplan + "', " +
+                "medarbejderstatus ='" + medarbejderstatus + "', " +
+                "uselog ='" + uselog + "'," +
+                "' WHERE username = '" + username +"'");
 
     }
 
+    public void opdaterMedarbejder(Medarbejder medarbejder){
+        jdbcTemplate.update("UPDATE vagtplantestdb.medarbejdere SET " +
+                "navn ='" + medarbejder.getName() + "' , "+
+                "initialer='" + medarbejder.getInitialer() +"' , "+
+                "telefonnummer ='" + medarbejder.getTelefonnummer() +"' , "+
+                "visivagtplan ='" + medarbejder.getVisIVagtplan() + "' , "+
+                "medarbejderstatus ='" + medarbejder.getMedarbejderStatus() + "' , "+
+                "uselog ='" + medarbejder.getUselog() + "' , "+
+                "' WHERE username = '" + medarbejder.getUsername() + "'");
+    }
     //*******************************************
     //VAGTBEHOV
     //*******************************************
@@ -145,8 +159,8 @@ public class VagtansvarligRepository extends MedarbejderRepository implements IV
             vagtplansListe.add(new Vagtplan(
                     sqlRowSet.getInt("id"),
                     sqlRowSet.getString("titel"),
-                    sqlRowSet.getDate("fra"),
-                    sqlRowSet.getDate("til"),
+                    sqlRowSet.getDate("fra").toLocalDate(),
+                    sqlRowSet.getDate("til").toLocalDate(),
                     sqlRowSet.getString("kommentar"),
                     vagtliste
             ));
@@ -167,18 +181,42 @@ public class VagtansvarligRepository extends MedarbejderRepository implements IV
 
         //Populér hele den store vagtplan for alle medarbejdere med sql-statements.
 
-        Vagtplan vagtplan = new Vagtplan(id);
+        String sql = "SELECT * FROM vagtplantestdb.vagtplaner WHERE username='"+ id + "'";
+        sqlRowSet = jdbcTemplate.queryForRowSet(sql);
+
+        ArrayList<Vagt> vagtliste = new ArrayList<>();
+
+        Vagtplan vagtplan = new Vagtplan();
+
+        while (sqlRowSet.next()){vagtplan = new Vagtplan(
+                    sqlRowSet.getInt("id"),
+                    sqlRowSet.getString("titel"),
+                    sqlRowSet.getDate("fra").toLocalDate(),
+                    sqlRowSet.getDate("til").toLocalDate(),
+                    sqlRowSet.getString("kommentar"),
+                    vagtliste
+            );
+
+//        for(int i = 0; i ++; vagtplan.getDuration(vagtplan.getTil(), vagtplan.getFra())) {
+//
+//
+//            String sql = "SELECT * FROM vagtplantestdb.vagter WHERE id=" + vagtplan.getId() + "'";
+//            sqlRowSet = jdbcTemplate.queryForRowSet(sql);
+//        }
+        }
+
         return vagtplan;
     }
 
     @Override
-    public ArrayList<Vagt> visVagtplan(Medarbejder medarbejder){
+    public Vagtplan visVagtplan(Medarbejder medarbejder, Vagtplan vagtplan){
 
-        ArrayList<Vagt> vagtListe = new ArrayList<>();
+
+        Vagtplan vagtplan1;
 
         //Populér den enkelte medarbejders egen vagtliste med sql-statement.
 
-        return vagtListe;
+        return vagtplan;
     }
 
     //*******************************************
@@ -187,12 +225,48 @@ public class VagtansvarligRepository extends MedarbejderRepository implements IV
     //*******************************************
 
     @Override
-    public void opretForbehold(Forbehold forbehold){
+    public ArrayList<Forbehold> seForbeholdsListe(){
+        ArrayList<Forbehold> forbeholdsliste = new ArrayList<>();
+        //Populér forbeholdsliste med sql-kald
+        String sql = "SELECT * from vagtplantestdb.forbehold";
+        sqlRowSet = jdbcTemplate.queryForRowSet(sql);
 
+        while (sqlRowSet.next()){
+            forbeholdsliste.add(new Forbehold(
+                    sqlRowSet.getInt("id"),
+                    sqlRowSet.getDate("dato").toLocalDate(),
+                    sqlRowSet.getString("kommentar")
+            ));
+        }
+        return forbeholdsliste;
+    }
+
+    @Override
+    public ArrayList<Forbehold> seForbeholdsListe(String username){
+        ArrayList<Forbehold> forbeholdsliste = new ArrayList<>();
+        //Populér forbeholdsliste med sql-kald
+        String sql = "SELECT * FROM vagtplantestdb.vagtplaner WHERE username='"+ username + "'";
+        sqlRowSet = jdbcTemplate.queryForRowSet(sql);
+
+        while (sqlRowSet.next()){
+            forbeholdsliste.add(new Forbehold(
+                    sqlRowSet.getInt("id"),
+                    sqlRowSet.getDate("dato").toLocalDate(),
+                    sqlRowSet.getString("kommentar")
+            ));
+        }
+        return forbeholdsliste;
+    }
+
+    @Override
+    public void opretForbehold(Forbehold forbehold, String userName){
+        String sql = "INSERT INTO vagtplantestdb.forbehold (dato, kommentar, fk_username_forbehold) VALUES (" + forbehold.getDato() + ", " + forbehold.getKommentar() + ", " + userName + "'";
+
+        jdbcTemplate.update(sql);
     }
 
     @Override
     public void redigerForbehold(Forbehold forbehold){
-
     }
+
 }

@@ -5,48 +5,30 @@ import java.time.LocalDateTime;
 
 public class Forbehold {
 
-    //testkommentar
-    private LocalDateTime fra;
-    private LocalDateTime til;
-
-    private Boolean accepteretAfVagtansvarlig;
+    private int id;
+    private LocalDate dato;
     private String kommentar;
 
-    public Forbehold(String fra_string, String til_string, boolean accepteretAfVagtansvarlig, String kommentar){
-        this.fra = LocalDateTime.parse(fra_string);
-        this.til = LocalDateTime.parse(til_string);
-        this.accepteretAfVagtansvarlig = accepteretAfVagtansvarlig;
-        this.kommentar = kommentar;
-    }
-    public Forbehold(LocalDateTime fra, LocalDateTime til, String kommentar) {
-        this.fra = fra;
-        this.til = til;
-        this.accepteretAfVagtansvarlig = false;
+    public Forbehold(int id, LocalDate dato, String kommentar) {
+        this.id = id;
+        this.dato = dato;
         this.kommentar = kommentar;
     }
 
-    public LocalDateTime getFra() {
-        return fra;
+    public int getId() {
+        return id;
     }
 
-    public void setFra(LocalDateTime fra) {
-        this.fra = fra;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public LocalDateTime getTil() {
-        return til;
+    public LocalDate getDato() {
+        return dato;
     }
 
-    public void setTil(LocalDateTime til) {
-        this.til = til;
-    }
-
-    public Boolean getAccepteretAfVagtansvarlig() {
-        return accepteretAfVagtansvarlig;
-    }
-
-    public void setAccepteretAfVagtansvarlig(Boolean accepteretAfVagtansvarlig) {
-        this.accepteretAfVagtansvarlig = accepteretAfVagtansvarlig;
+    public void setDato(LocalDate dato) {
+        this.dato = dato;
     }
 
     public String getKommentar() {

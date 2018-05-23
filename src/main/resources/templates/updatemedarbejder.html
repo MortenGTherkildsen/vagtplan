@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<head>
+<head xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
     <meta charset="UTF-8">
     <title>Update</title>
     <link rel="stylesheet" href="style.css">
@@ -9,10 +9,10 @@
     <h1>Update Student</h1>
 
     <form action="/updatemedarbejder" method="post">
-        <input type="text" th:value="${medarbejder.username}"name="username">
+        <input type="text" th:value="${medarbejder.username}" name="username">
 
         <label for="">password</label><br>
-        <input type="text"name="password"th:value="${medarbejder.password}">
+        <input type="text" name="password" th:value="${medarbejder.password}">
 
         <br>
         <label for="">Name</label><br>

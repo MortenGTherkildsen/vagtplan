@@ -14,8 +14,8 @@ public class Medarbejder {
     private String name;
     private String initialer;
     private String telefonnummer;
-    private String visivagtplan; //Hvilket navn skal vises i vagtplan (username, name, initialer m.fl.)
-    private int medarbejderStatus; // (Aktiv medarbejder/Fyret)(Måske er int bedre. Stadig 0/1 for aktiv/fyret, men 2 for f.eks. konsulent m.fl.?)
+    private String visivagtplan; //Hvilket navn skal vises i vagtplan (navn, kælenavn, initialer eller hvad)
+    private int medarbejderStatus; // (Opsagt/Aktiv medarbejder/ .. måske arbejdende/ikke-arbejdende vagtansvarlig osv.)
     private String uselog;
     private String minVagtansvarlige;
 
@@ -105,15 +105,15 @@ public class Medarbejder {
         boolean harforbehold = false;
 
         for (Forbehold forbehold:forbeholdsliste) {
-            if(forbehold.getFra().toLocalDate().equals(localDate)){
+            if(forbehold.getDato().equals(localDate)){
                 harforbehold = true;
             }
         }
         return harforbehold;
     }
 
-    public void opretForbehold(LocalDateTime fra, LocalDateTime til, String kommentar){
-        Forbehold forbehold = new Forbehold(fra, til, kommentar);
+    public void opretForbehold(int id, LocalDate dato, String kommentar){
+        Forbehold forbehold = new Forbehold(id, dato, kommentar);
         forbeholdsliste.add(forbehold);
     }
 
