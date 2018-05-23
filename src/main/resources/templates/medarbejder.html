@@ -18,27 +18,44 @@
     </form>
     <br>
 
+    <form action="/opdatermedarbejder" method="post">
+        <input type="text" th:value="${medarbejder.username}" name="username">
+
+        <label for="">password</label><br>
+        <input type="text" name="password" th:value="${medarbejder.password}">
+
+        <br>
+        <label for="">Name</label><br>
+        <input type="text"name="name"th:value="${medarbejder.name}">
+        <br>
+
+        <label for="">Intialer</label><br>
+        <input type="text"name="initialer"th:value="${medarbejder.initialer}">
+        <br>
+
+        <label for="">Telefonnummer</label><br>
+        <input type="text"name="telefonnummer"th:value="${medarbejder.telefonnummer}">
+        <br>
+
+        <input type="submit"class="btn btn-create" value="Update">
+
+    </form>
+    <br>
+    <h2>Forbehold</h2>
+    <br>
     <table>
         <thead>
         <tr>
-            <th>username</th>
-            <th>name</th>
-            <th>initialer</th>
-            <th>telefonnummer</th>
-            <th></th>
+            <th>Dato</th>
+            <th>Kommentar</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="medarbejder : ${medarbejder}">
-            <td th:text="${medarbejder.navn}"></td>
-            <td th:text="${forbehold.til}"></td>
-            <td th:text="${forbehold.accepteretAfVagtansvarlig}"></td>
+        <tr th:each="forbehold : ${forbeholdsliste}">
+            <td th:text="${forbehold.dato}"></td>
             <td th:text="${forbehold.kommentar}"></td>
-            <td></td>
         </tr>
-
         </tbody>
-
     </table>
     <form action="/Rediger Oplysninger"method="post">
         <input type="submit"value="Rediger Oplysninger" class="btn-del">

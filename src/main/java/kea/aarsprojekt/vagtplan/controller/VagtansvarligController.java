@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+
 
 @Controller
 public class VagtansvarligController {
@@ -71,9 +73,10 @@ public class VagtansvarligController {
 
 
     @GetMapping("/medarbejder")
-    public  String medarbejder(@RequestParam Medarbejder medarbejder, Model model) {
-        model.addAttribute("medarbejder=" + medarbejder.getUsername(), medarbejder);
-        model.addAttribute(medarbejder.getForbeholdsliste());
+    public  String medarbejder(@RequestParam("username") String username, Model model) {
+        model.addAttribute("medarbejder", vagtansvarligRepository.getMedarbejder(username));
+        model.addAttribute("forbeholdsliste", vagtansvarligRepository.seForbeholdsListe(username));
+
         return "medarbejder";
     }
 
@@ -97,18 +100,20 @@ public class VagtansvarligController {
 //
 //    }
 
-    @GetMapping("opretforbehold")
-    public String opretforbehold(){
-
+    @GetMapping("/opretforbehold")
+    public String opretforbehold(Model model){
+        Forbehold forbehold = new Forbehold();
+        model.addAttribute("forbehold", forbehold);
         return "opretforbehold";
     }
 
-    @PostMapping("opretforbehold")
-    public String opretforbehold (@ModelAttribute Medarbejder medarbejder,
-                                  @ModelAttribute Forbehold forbehold,
-                                  Model model){
-        model.addAttribute(vagtansvarligRepository.opretForbehold(forbehold, medarbejder.getUsername()));
-        return "opretforbehold";
+    @PostMapping("/opretforbehold")
+    public String opretforbehold (@ModelAttribute("forbehold") Forbehold forbehold,
+                                  @RequestParam("username") String username, Model model){
+
+        Medarbejder medarbejder = vagtansvarligRepository.getMedarbejder(username);
+        vagtansvarligRepository.opretForbehold(forbehold.getDato(), forbehold.getKommentar(), medarbejder.getUsername());
+        return "redirect:/medarbejder?=" + medarbejder.getUsername();
     }
     @GetMapping("opretvagtbehov")
     public String Vagtbehov (Model model) {

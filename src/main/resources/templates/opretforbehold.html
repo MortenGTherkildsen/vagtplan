@@ -8,26 +8,38 @@
 <body>
 <div class="container">
     <h1>Forbehold</h1>
-    <table>
-        <thead>
-        <tr>
-            <th>Fra</th>
-            <th>Til</th>
-            <th>Kommentar</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="forbehold : ${forbehold}">
-            <td th:text="${forbehold.fra}"></td>
-            <td th:text="${forbehold.til}"></td>
-            <td th:text="${forbehold.kommentar}"></td>
-            <td><a href="/create" class="btn-del">Slet</a>
-                <a href="/create" class="btn-ed">Opdater</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <a href="/create" class="btn">Create</a>
+    <form method="post" th:object="${forbehold}">
+
+        <br>
+        <label for="">Dato</label><br>
+        <input type="date"name="dato"placeholder="Dato" th:field="*{dato}">
+        <br>
+        <label for="">Kommentar</label><br>
+        <input type="text"name="kommentar"placeholder="Kommentar" th:field="*{kommentar}">
+
+        <input type="submit" formaction="/opretforbehold" class="btn-create" value="SEND">
+
+    </form>
+    <!--<table>-->
+        <!--<thead>-->
+        <!--<tr>-->
+            <!--<th>Fra</th>-->
+            <!--<th>Til</th>-->
+            <!--<th>Kommentar</th>-->
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr th:each="forbehold : ${forbehold}">-->
+            <!--<td th:text="${forbehold.fra}"></td>-->
+            <!--<td th:text="${forbehold.til}"></td>-->
+            <!--<td th:text="${forbehold.kommentar}"></td>-->
+            <!--<td><a href="/create" class="btn-del">Slet</a>-->
+                <!--<a href="/create" class="btn-ed">Opdater</a>-->
+            <!--</td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+    <!--</table>-->
+    <!--<a href="/create" class="btn">Create</a>-->
 </div>
 </body>
 </html>

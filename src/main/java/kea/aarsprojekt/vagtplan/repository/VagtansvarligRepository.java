@@ -75,7 +75,8 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
 
         ArrayList<Forbehold> forbeholdsliste = new ArrayList<>();
 
-            Medarbejder medarbejder = new Medarbejder(sqlRowSet.getString("username"),
+        while (sqlRowSet.next()) {
+            return new Medarbejder(sqlRowSet.getString("username"),
                     sqlRowSet.getString("password"),
                     sqlRowSet.getString("role"),
                     sqlRowSet.getString("navn"),
@@ -86,8 +87,8 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
                     sqlRowSet.getString("uselog"),
                     sqlRowSet.getString("vagtansvarligsemail"), forbeholdsliste);
 
-
-        return medarbejder;
+        }
+        return null;
     }
 
 //    @Override
@@ -238,12 +239,12 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
     public ArrayList<Forbehold> seForbeholdsListe(String username){
         ArrayList<Forbehold> forbeholdsliste = new ArrayList<>();
         //Populér forbeholdsliste med sql-kald
-        String sql = "SELECT * FROM vagtplantestdb.vagtplaner WHERE username='"+ username + "'";
+        String sql = "SELECT * FROM vagtplantestdb.forbehold WHERE fk_username_forbehold='"+ username + "'";
         sqlRowSet = jdbcTemplate.queryForRowSet(sql);
 
         while (sqlRowSet.next()){
             forbeholdsliste.add(new Forbehold(
-                    sqlRowSet.getInt("id"),
+                    sqlRowSet.getInt("forbeholdid"),
                     sqlRowSet.getDate("dato").toLocalDate(),
                     sqlRowSet.getString("kommentar")
             ));
@@ -252,14 +253,13 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
     }
 
     @Override
-    public Forbehold opretForbehold(Forbehold forbehold, String userName){
+    public void opretForbehold(LocalDate dato, String kommentar, String userName){
 
 
-        String sql = "INSERT INTO vagtplantestdb.forbehold (dato, kommentar, fk_username_forbehold) VALUES (" + forbehold.getDato() + ", " + forbehold.getKommentar() + ", " + userName + "'";
+        String sql = "INSERT INTO vagtplantestdb.forbehold (dato, kommentar, fk_username_forbehold) VALUES (" + dato + ", " + kommentar + ", " + userName + "'";
 
         jdbcTemplate.update(sql);
 
-        return forbehold;
     }
 
     @Override
