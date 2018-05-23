@@ -15,6 +15,9 @@ public class Forbehold {
         this.kommentar = kommentar;
     }
 
+    public Forbehold() {
+    }
+
     public int getId() {
         return id;
     }

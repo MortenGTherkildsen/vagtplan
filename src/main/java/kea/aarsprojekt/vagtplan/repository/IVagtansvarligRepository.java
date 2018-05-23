@@ -6,6 +6,7 @@ import kea.aarsprojekt.vagtplan.model.Vagtbehov;
 import kea.aarsprojekt.vagtplan.model.Vagtplan;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 @Repository
@@ -18,7 +19,8 @@ public interface IVagtansvarligRepository {
 
     ArrayList<Forbehold> seForbeholdsListe(String username);
     ArrayList<Forbehold> seForbeholdsListe();
-    Forbehold opretForbehold(Forbehold forbehold, String username);
+    //void opretForbehold(LocalDate dato, String kommentar, String username);
+    void opretForbehold(Forbehold forbehold, String username);
     void redigerForbehold(Forbehold forbehold);
 
     ArrayList<Vagtbehov> visVagtbehovsListe();
