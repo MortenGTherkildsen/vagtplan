@@ -54,15 +54,13 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
         jdbcTemplate.update("INSERT INTO vagtplantestdb.medarbejdere " +
                 "(username, password, role, navn, initialer, telefonnummer, visivagtplan, medarbejderstatus, vagtansvarligsemail) " +
                 "VALUES ('" + medarbejder.getUsername() + "' , '" +
-                medarbejder.getPassword() + "' , '" +
-                medarbejder.getRole() + "' , '" +
+                medarbejder.getPassword() + "' , 'medarbejder' , '" +
                 medarbejder.getName() + "' , '"+
                 medarbejder.getInitialer() + "' , '" +
                 medarbejder.getTelefonnummer() + "' , '" +
-                medarbejder.getVisIVagtplan() + "' , '" +
-                medarbejder.getMedarbejderStatus() + "' , '" +
-                medarbejder.getUselog() + "' " +
-                " WHERE username = '" + medarbejder.getUsername() + "'");
+                medarbejder.getName() + "' , '" +
+                1 + "' , '" +
+                medarbejder.getMinVagtansvarlige() + "') ");
 
     }
 
@@ -253,10 +251,11 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
     }
 
     @Override
-    public void opretForbehold(LocalDate dato, String kommentar, String userName){
+    public void opretForbehold(Forbehold forbehold, String userName){
 
 
-        String sql = "INSERT INTO vagtplantestdb.forbehold (dato, kommentar, fk_username_forbehold) VALUES (" + dato + ", " + kommentar + ", " + userName + "'";
+        String sql = "INSERT INTO vagtplantestdb.forbehold (dato, kommentar, fk_username_forbehold) " +
+                "VALUES (" + forbehold.getDato() + ", '" + forbehold.getKommentar() + "', '" + userName + "')";
 
         jdbcTemplate.update(sql);
 

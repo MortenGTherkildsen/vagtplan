@@ -19,7 +19,8 @@ public interface IVagtansvarligRepository {
 
     ArrayList<Forbehold> seForbeholdsListe(String username);
     ArrayList<Forbehold> seForbeholdsListe();
-    void opretForbehold(LocalDate dato, String kommentar, String username);
+    //void opretForbehold(LocalDate dato, String kommentar, String username);
+    void opretForbehold(Forbehold forbehold, String username);
     void redigerForbehold(Forbehold forbehold);
 
     ArrayList<Vagtbehov> visVagtbehovsListe();

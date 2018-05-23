@@ -108,13 +108,14 @@ public class VagtansvarligController {
     }
 
     @PostMapping("/opretforbehold")
-    public String opretforbehold (@ModelAttribute("forbehold") Forbehold forbehold,
+    public String opretforbeholdformedarbejder (@ModelAttribute("forbehold") Forbehold forbehold,
                                   @RequestParam("username") String username, Model model){
 
         Medarbejder medarbejder = vagtansvarligRepository.getMedarbejder(username);
-        vagtansvarligRepository.opretForbehold(forbehold.getDato(), forbehold.getKommentar(), medarbejder.getUsername());
-        return "redirect:/medarbejder?=" + medarbejder.getUsername();
+        vagtansvarligRepository.opretForbehold(forbehold, medarbejder.getUsername());
+       return "redirect:/medarbejder?=" + medarbejder.getUsername();
     }
+
     @GetMapping("opretvagtbehov")
     public String Vagtbehov (Model model) {
         return "opretvagtbehov";
