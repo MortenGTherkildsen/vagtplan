@@ -8,27 +8,27 @@
 <body>
 <div class="container1">
     <h1>Personale</h1>
+    <a href="/opretmedarbejder" class="btn">Tilføj Ny Medarbejder</a>
+    <br>
     <table>
         <thead>
         <tr>
-            <th>username</th>
-            <th>password</th>
-            <th>role</th>
-            <th>navn</th>
-            <th>intilaler</th>
-            <th>Tlf</th>
+            <th>Brugernavn (email)</th>
+            <th>Rolle</th>
+            <th>Navn</th>
+            <th>Intilaler</th>
+            <th>Telefon</th>
             <th></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="medarbejder : ${medarbejderliste}">
             <td th:text="${medarbejder.username}"></td>
-            <td th:text="${medarbejder.password}"></td>
             <td th:text="${medarbejder.role}"></td>
             <td th:text="${medarbejder.name}"></td>
             <td th:text="${medarbejder.initialer}"></td>
             <td th:text="${medarbejder.telefonnummer}"></td>
-            <td><a th:href="${'/medarbejder?username='+medarbejder.username}" class="btn btn-details">Details</a>
+            <td><a th:href="${'/medarbejder?username='+medarbejder.username}" class="btn btn-details">Se mere...</a>
                  <a href="/semedarbejdersforbeholdsliste" class="btn btn-ed">Se Forbeholdsliste</a>
                 <a th:href="${'/opretforbehold?username='+medarbejder.username}" class="btn btn-create">Opret forbehold</a>
                 <!--<a href="/deletemedarbejder" class="btn btn-del">Slet Medarbejder</a>-->

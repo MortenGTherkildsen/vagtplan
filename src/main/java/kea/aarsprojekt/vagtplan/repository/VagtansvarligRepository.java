@@ -62,6 +62,8 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
                 1 + "' , '" +
                 medarbejder.getMinVagtansvarlige() + "') ");
 
+        ArrayList<Forbehold> forbeholdsliste = new ArrayList<>();
+        medarbejder.setForbeholdsliste(forbeholdsliste);
     }
 
     @Override
