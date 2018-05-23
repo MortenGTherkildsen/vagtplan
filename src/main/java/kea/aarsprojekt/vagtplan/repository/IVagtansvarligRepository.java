@@ -14,11 +14,11 @@ public interface IVagtansvarligRepository {
     ArrayList<Medarbejder> visMedarbejderListe();
     void opretMedarbejder(Medarbejder medarbejder);
 //    void opretMedarbejder(String username, String navn, String initialer, String telefonnummer, String visivagtplan, int medarbejderstatus, String uselog);
-    void opdaterMedarbejder(String username, String navn, String initialer, String telefonnummer, String visivagtplan, int medarbejderstatus, String uselog);
+//    void opdaterMedarbejder(String username, String navn, String initialer, String telefonnummer, String visivagtplan, int medarbejderstatus, String uselog);
 
     ArrayList<Forbehold> seForbeholdsListe(String username);
     ArrayList<Forbehold> seForbeholdsListe();
-    void opretForbehold(Forbehold forbehold, String username);
+    Forbehold opretForbehold(Forbehold forbehold, String username);
     void redigerForbehold(Forbehold forbehold);
 
     ArrayList<Vagtbehov> visVagtbehovsListe();

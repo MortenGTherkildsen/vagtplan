@@ -1,5 +1,6 @@
 package kea.aarsprojekt.vagtplan.controller;
 
+import kea.aarsprojekt.vagtplan.model.Forbehold;
 import kea.aarsprojekt.vagtplan.model.Medarbejder;
 import kea.aarsprojekt.vagtplan.model.Vagtbehov;
 import kea.aarsprojekt.vagtplan.model.Vagtplan;
@@ -26,6 +27,8 @@ public class VagtansvarligController {
 
         return "semedarbejderliste";
     }
+
+
 
     @GetMapping("/sevagtbehovsliste")
     public String vagtbehovsliste(Model model){
@@ -68,9 +71,16 @@ public class VagtansvarligController {
 
 
     @GetMapping("/medarbejder")
-    public  String MedarbejderMenu(@RequestParam("username") String user, Model model) {
-        model.addAttribute("/medarbejder="+user,vagtansvarligRepository.getMedarbejder(user));
+    public  String medarbejder(@RequestParam Medarbejder medarbejder, Model model) {
+        model.addAttribute("medarbejder=" + medarbejder.getUsername(), medarbejder);
+        model.addAttribute(medarbejder.getForbeholdsliste());
         return "medarbejder";
+    }
+
+    @GetMapping("/medarbejdermenu")
+    public  String MedarbejderMenu(Model model) {
+
+        return "medarbejdermenu";
     }
 
     @GetMapping("/forbeholdsliste")
@@ -79,16 +89,25 @@ public class VagtansvarligController {
         return "forbeholdsliste";
     }
 
-    @GetMapping("forbeholdsliste")
-    public String seForbeholdsliste (@RequestParam("username") String username, Model model){
-        model.addAttribute("/forbeholdsliste_for_"+ username, vagtansvarligRepository.seForbeholdsListe(username));
+//    @GetMapping("forbeholdsliste")
+//    public String seForbeholdsliste (@RequestParam("username") String username, Model model){
+//        model.addAttribute("/forbeholdsliste_for_"+ username, vagtansvarligRepository.seForbeholdsListe(username));
+//
+//        return "forbeholdsliste";
+//
+//    }
 
-        return "forbeholdsliste";
+    @GetMapping("opretforbehold")
+    public String opretforbehold(){
 
+        return "opretforbehold";
     }
 
     @PostMapping("opretforbehold")
-    public String Forbeholdmenu1 (Model model){
+    public String opretforbehold (@ModelAttribute Medarbejder medarbejder,
+                                  @ModelAttribute Forbehold forbehold,
+                                  Model model){
+        model.addAttribute(vagtansvarligRepository.opretForbehold(forbehold, medarbejder.getUsername()));
         return "opretforbehold";
     }
     @GetMapping("opretvagtbehov")
@@ -102,7 +121,6 @@ public class VagtansvarligController {
         return "redirect:/sevagtbehovsliste";
     }
 
-
     @GetMapping("/opretmedarbejder")
     public String opret() {
         return "opretmedarbejder";
@@ -114,11 +132,15 @@ public class VagtansvarligController {
         return "redirect:/semedarbejderliste";
     }
 
-    @PostMapping("/updatemedarbejder")
-    public String update(@ModelAttribute Medarbejder medarbejder) {
+    @PostMapping("/opdatermedarbejder")
+    public String opdater(@ModelAttribute Medarbejder medarbejder) {
         vagtansvarligRepository.opdaterMedarbejder(medarbejder);
         return "redirect:/semedarbejderliste";
     }
 
-
+    @GetMapping("/opdatermedarbejder")
+    public String opdater(@RequestParam("username") String username, Model model) {
+        model.addAttribute("medarbejder", vagtansvarligRepository.getMedarbejder(username));
+        return "opdatermedarbejder";
+    }
 }

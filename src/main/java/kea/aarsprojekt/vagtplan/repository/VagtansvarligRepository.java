@@ -49,14 +49,6 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
         return medarbejderliste;
     }
 
-//    @Override
-//    public void opretMedarbejder(String user){
-//
-//        String sql= "INSERT INTO medarbejdere(username) VALUES ("+ user + "); SELECT LAST_INSERT_ID();";
-//
-//        jdbcTemplate.execute(sql);
-//    }
-
     public void opretMedarbejder(Medarbejder medarbejder){
 
         jdbcTemplate.update("INSERT INTO vagtplantestdb.medarbejdere " +
@@ -83,33 +75,34 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
 
         ArrayList<Forbehold> forbeholdsliste = new ArrayList<>();
 
-        Medarbejder medarbejder = new Medarbejder(sqlRowSet.getString("username"),
-                sqlRowSet.getString("password"),
-                sqlRowSet.getString("role"),
-                sqlRowSet.getString("navn"),
-                sqlRowSet.getString("initialer"),
-                sqlRowSet.getString("telefonnummer"),
-                sqlRowSet.getString("visivagtplan"),
-                sqlRowSet.getInt("medarbejderstatus"),
-                sqlRowSet.getString("uselog"),
-                sqlRowSet.getString("vagtansvarligsemail"), forbeholdsliste);
+            Medarbejder medarbejder = new Medarbejder(sqlRowSet.getString("username"),
+                    sqlRowSet.getString("password"),
+                    sqlRowSet.getString("role"),
+                    sqlRowSet.getString("navn"),
+                    sqlRowSet.getString("initialer"),
+                    sqlRowSet.getString("telefonnummer"),
+                    sqlRowSet.getString("visivagtplan"),
+                    sqlRowSet.getInt("medarbejderstatus"),
+                    sqlRowSet.getString("uselog"),
+                    sqlRowSet.getString("vagtansvarligsemail"), forbeholdsliste);
+
 
         return medarbejder;
     }
 
-    @Override
-    public void opdaterMedarbejder(String username, String navn, String initialer, String telefonnummer, String visivagtplan, int medarbejderstatus, String uselog){
-
-        jdbcTemplate.update("UPDATE vagtplantestdb.medarbejdere SET " +
-                "navn ='" + navn + "', " +
-                "initialer='" + initialer +"', " +
-                "telefonnummer ='" + telefonnummer +"', " +
-                "visivagtplan ='" + visivagtplan + "', " +
-                "medarbejderstatus ='" + medarbejderstatus + "', " +
-                "uselog ='" + uselog + "'," +
-                "' WHERE username = '" + username +"'");
-
-    }
+//    @Override
+//    public void opdaterMedarbejder(String username, String navn, String initialer, String telefonnummer, String visivagtplan, int medarbejderstatus, String uselog){
+//
+//        jdbcTemplate.update("UPDATE vagtplantestdb.medarbejdere SET " +
+//                "navn ='" + navn + "', " +
+//                "initialer='" + initialer +"', " +
+//                "telefonnummer ='" + telefonnummer +"', " +
+//                "visivagtplan ='" + visivagtplan + "', " +
+//                "medarbejderstatus ='" + medarbejderstatus + "', " +
+//                "uselog ='" + uselog + "'," +
+//                "' WHERE username = '" + username +"'");
+//
+//    }
 
     public void opdaterMedarbejder(Medarbejder medarbejder){
         jdbcTemplate.update("UPDATE vagtplantestdb.medarbejdere SET " +
@@ -259,10 +252,14 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
     }
 
     @Override
-    public void opretForbehold(Forbehold forbehold, String userName){
+    public Forbehold opretForbehold(Forbehold forbehold, String userName){
+
+
         String sql = "INSERT INTO vagtplantestdb.forbehold (dato, kommentar, fk_username_forbehold) VALUES (" + forbehold.getDato() + ", " + forbehold.getKommentar() + ", " + userName + "'";
 
         jdbcTemplate.update(sql);
+
+        return forbehold;
     }
 
     @Override

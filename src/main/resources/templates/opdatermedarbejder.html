@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<head xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
     <meta charset="UTF-8">
     <title>Update</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="container">
-    <h1>Update Student</h1>
+    <h1>Opdater medarbejder</h1>
 
-    <form action="/updatemedarbejder" method="post">
+    <form action="/opdatermedarbejder" method="post">
         <input type="text" th:value="${medarbejder.username}" name="username">
 
         <label for="">password</label><br>
