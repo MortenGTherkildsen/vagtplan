@@ -61,8 +61,7 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
                 medarbejder.getTelefonnummer() + "' , '" +
                 medarbejder.getVisIVagtplan() + "' , '" +
                 medarbejder.getMedarbejderStatus() + "' , '" +
-                medarbejder.getUselog() + "' " +
-                " WHERE username = '" + medarbejder.getUsername() + "'");
+                medarbejder.getUselog() + "')");
 
     }
 
