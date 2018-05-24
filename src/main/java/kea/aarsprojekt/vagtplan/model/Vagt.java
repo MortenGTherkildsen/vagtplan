@@ -15,7 +15,6 @@ public class Vagt {
     double vagtlaengde=0;
         // Udregn vagtlængde
         // TODO: 08-05-2018
-
     return vagtlaengde;
     }
 

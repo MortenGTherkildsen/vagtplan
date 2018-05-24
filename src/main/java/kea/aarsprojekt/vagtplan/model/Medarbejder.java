@@ -17,7 +17,7 @@ public class Medarbejder {
     private String visivagtplan; //Hvilket navn skal vises i vagtplan (navn, kælenavn, initialer eller hvad)
     private int medarbejderStatus; // (Opsagt/Aktiv medarbejder/ .. måske arbejdende/ikke-arbejdende vagtansvarlig osv.)
     private String uselog;
-    private String minVagtansvarlige;
+    private String minVagtansvarlige = "morten@therkildsen.com";
 
     private ArrayList<Forbehold> forbeholdsliste;
 

@@ -18,6 +18,7 @@ public interface IVagtansvarligRepository {
 //    void opretMedarbejder(String username, String navn, String initialer, String telefonnummer, String visivagtplan, int medarbejderstatus, String uselog);
 //    void opdaterMedarbejder(String username, String navn, String initialer, String telefonnummer, String visivagtplan, int medarbejderstatus, String uselog);
 
+
     ArrayList<Forbehold> seForbeholdsListe(String username);
     ArrayList<Forbehold> seForbeholdsListe();
     //void opretForbehold(LocalDate dato, String kommentar, String username);

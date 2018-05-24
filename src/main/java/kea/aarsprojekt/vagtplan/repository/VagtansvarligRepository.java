@@ -50,30 +50,13 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
         return medarbejderliste;
     }
 
-//    public void opretMedarbejder(Medarbejder medarbejder){
-//
-//        jdbcTemplate.update("INSERT INTO vagtplantestdb.medarbejdere " +
-//                "(username, password, role, navn, initialer, telefonnummer, visivagtplan, medarbejderstatus, vagtansvarligsemail) " +
-//                "VALUES ('" + medarbejder.getUsername() + "' , '" +
-//                medarbejder.getPassword() + "' , 'medarbejder' , '" +
-//                medarbejder.getName() + "' , '"+
-//                medarbejder.getInitialer() + "' , '" +
-//                medarbejder.getTelefonnummer() + "' , '" +
-//                medarbejder.getName() + "' , '" +
-//                1 + "' , '" +
-//                medarbejder.getMinVagtansvarlige() + "') ");
-//
-//        ArrayList<Forbehold> forbeholdsliste = new ArrayList<>();
-//        medarbejder.setForbeholdsliste(forbeholdsliste);
-//    }
-
     public void opretMedarbejder(Medarbejder medarbejder) throws SQLException{
 
         String sql = "INSERT INTO vagtplantestdb.medarbejdere " +
                 "(username, password, role, navn, initialer, telefonnummer, " +
                 "visivagtplan, medarbejderstatus, vagtansvarligsemail) VALUES (?,?,?,?,?,?,?,?,?)";
 
-        Object[] args = {medarbejder.getUsername(), medarbejder.getPassword(), medarbejder.getRole(), medarbejder.getName(), medarbejder.getInitialer(), medarbejder. getTelefonnummer(), medarbejder.getVisIVagtplan(), medarbejder.getUselog(), medarbejder.getMinVagtansvarlige()};
+        Object[] args = {medarbejder.getUsername(), medarbejder.getPassword(), "medarbejder", medarbejder.getName(), medarbejder.getInitialer(), medarbejder. getTelefonnummer(), medarbejder.getVisIVagtplan(), medarbejder.getUselog(), medarbejder.getMinVagtansvarlige()};
 
         jdbcTemplate.update(sql, args);
 
@@ -267,6 +250,7 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
 
     @Override
     public void opretForbehold(Forbehold forbehold, String userName){
+
 
 
         String sql = "INSERT INTO vagtplantestdb.forbehold (dato, kommentar, fk_username_forbehold) " +
