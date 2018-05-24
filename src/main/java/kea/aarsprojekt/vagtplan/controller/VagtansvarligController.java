@@ -6,13 +6,13 @@ import kea.aarsprojekt.vagtplan.model.Vagtbehov;
 import kea.aarsprojekt.vagtplan.model.Vagtplan;
 import kea.aarsprojekt.vagtplan.repository.IVagtansvarligRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 
@@ -92,28 +92,22 @@ public class VagtansvarligController {
         return "forbeholdsliste";
     }
 
-//    @GetMapping("forbeholdsliste")
-//    public String seForbeholdsliste (@RequestParam("username") String username, Model model){
-//        model.addAttribute("/forbeholdsliste_for_"+ username, vagtansvarligRepository.seForbeholdsListe(username));
-//
-//        return "forbeholdsliste";
-//
-//    }
-
     @GetMapping("/opretforbehold")
-    public String opretforbehold(Model model){
-        Forbehold forbehold = new Forbehold();
-        model.addAttribute("forbehold", forbehold);
+    public String opretforbehold(){
+
+
+
         return "opretforbehold";
     }
 
     @PostMapping("/opretforbehold")
-    public String opretforbeholdformedarbejder (@ModelAttribute("forbehold") Forbehold forbehold,
-                                  @RequestParam("username") String username, Model model){
-
+    public String opretforbeholdformedarbejder (@RequestParam ("dato")String dato ,
+                                                @RequestParam ("kommentar") String kommentar,
+                                                @RequestParam("username") String username, Model model){
         Medarbejder medarbejder = vagtansvarligRepository.getMedarbejder(username);
-        vagtansvarligRepository.opretForbehold(forbehold, medarbejder.getUsername());
-       return "redirect:/medarbejder?=" + medarbejder.getUsername();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        vagtansvarligRepository.opretForbehold(new Forbehold(LocalDate.parse(dato,format),kommentar),medarbejder.getUsername());
+        return "redirect:/medarbejder?username=" + medarbejder.getUsername();
     }
 
     @GetMapping("opretvagtbehov")
@@ -161,4 +155,5 @@ public class VagtansvarligController {
         vagtansvarligRepository.slet(username);
         return "redirect:/semedarbejderliste";
     }
+
 }

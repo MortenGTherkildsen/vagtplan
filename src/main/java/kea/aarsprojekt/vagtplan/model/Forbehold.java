@@ -18,6 +18,11 @@ public class Forbehold {
     public Forbehold() {
     }
 
+    public Forbehold(LocalDate dato,String kommentar){
+        this.dato=dato;
+        this.kommentar=kommentar;
+    }
+
     public int getId() {
         return id;
     }

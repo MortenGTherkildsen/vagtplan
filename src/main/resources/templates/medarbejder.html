@@ -8,27 +8,30 @@
 <body>
 
 <div class="container">
-    <h1>Medarbejder Menu</h1>
-    <form action="/sevagtplan"method="post">
-        <input type="submit"value="Vagtplan" class="btn-create                              ">
-    </form>
-    <br>
-    <form action="/opretforbehold"method="post">
-        <input type="submit"value="Forbehold" class="btn-ed">
-    </form>
-    <br>
 
+    <h2 th:text="${medarbejder.name}"></h2>
+
+    <a href="/sevagtplan" class="btn1 btn-ed">Vagtplan</a>
+    <br>
+    <br>
+    <a th:href="${'/opretforbehold?username='+medarbejder.username}" class="btn1 btn-create">Opret forbehold</a>
+    <br>
+    <br>
     <form action="/opdatermedarbejder" method="post">
+
+        <br>
+        <label for"">Brugernavn</label><br>
         <input type="text" th:value="${medarbejder.username}" name="username">
 
-        <label for="">password</label><br>
+        <br>
+        <label for="">Kodeord</label><br>
         <input type="text" name="password" th:value="${medarbejder.password}">
 
         <br>
-        <label for="">Name</label><br>
+        <label for="">Navn</label><br>
         <input type="text"name="name"th:value="${medarbejder.name}">
-        <br>
 
+        <br>
         <label for="">Intialer</label><br>
         <input type="text"name="initialer"th:value="${medarbejder.initialer}">
         <br>
@@ -37,7 +40,7 @@
         <input type="text"name="telefonnummer"th:value="${medarbejder.telefonnummer}">
         <br>
 
-        <input type="submit"class="btn btn-create" value="Update">
+        <input type="submit"class="btn btn-create" value="Opdater">
 
     </form>
     <br>
@@ -48,18 +51,22 @@
         <tr>
             <th>Dato</th>
             <th>Kommentar</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="forbehold : ${forbeholdsliste}">
             <td th:text="${forbehold.dato}"></td>
             <td th:text="${forbehold.kommentar}"></td>
+            <td>
+                <a href="/sevagtplan" class="btn btn-ed">Rediger</a>
+                <a href="/sevagtplan" class="btn btn-del">Slet</a>
+            </td>
         </tr>
         </tbody>
     </table>
-    <form action="/Rediger Oplysninger"method="post">
-        <input type="submit"value="Rediger Oplysninger" class="btn-del">
-    </form>
+    <br>
+    <br>
 </div>
 </body>
 </html>

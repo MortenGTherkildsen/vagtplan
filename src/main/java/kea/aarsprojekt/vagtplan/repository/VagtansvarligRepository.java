@@ -257,7 +257,7 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
 
 
         String sql = "INSERT INTO vagtplantestdb.forbehold (dato, kommentar, fk_username_forbehold) " +
-                "VALUES (" + forbehold.getDato() + ", '" + forbehold.getKommentar() + "', '" + userName + "')";
+                "VALUES ('" + forbehold.getDato() + "', '" + forbehold.getKommentar() + "', '" + userName + "')";
 
         jdbcTemplate.update(sql);
 

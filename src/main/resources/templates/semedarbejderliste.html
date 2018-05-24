@@ -8,7 +8,7 @@
 <body>
 <div class="container1">
     <h1>Personale</h1>
-    <a href="/opretmedarbejder" class="btn">Tilføj Ny Medarbejder</a>
+    <a  href="/opretmedarbejder" class="btn" >Tilføj Ny Medarbejder</a>
     <br>
     <table>
         <thead>
@@ -30,8 +30,8 @@
             <td th:text="${medarbejder.telefonnummer}"></td>
             <td>
                 <a th:href="${'/medarbejder?username='+medarbejder.username}" class="btn btn-details">Se mere...</a>
-                <a href="/semedarbejdersforbeholdsliste" class="btn btn-ed">Se Forbeholdsliste</a>
-                <a th:href="${'/opretforbehold?username='+medarbejder.username}" class="btn btn-create">Opret forbehold</a>
+                <!--a href="/semedarbejdersforbeholdsliste" class="btn btn-ed">Se Forbeholdsliste</a>-->
+                <a th:href="${'/opretforbehold?username='+medarbejder.username}" class="btn btn-ed">Opret forbehold</a>
                 <a th:href="${'/sletmedarbejder?username='+medarbejder.username}" class="btn btn-del">Slet Medarbejder</a>
 
             </td>

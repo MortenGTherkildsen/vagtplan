@@ -7,14 +7,14 @@ body {
 
 .container {
     text-align: center;
-    width: 40%;
+    width: 80%;
     font-size: 20px;
     margin: 0 auto;
 }
 .container1 {
     text-align: center;
     width: 80%;
-    font-size: 15px;
+    font-size: 1rem;
     margin: 0 auto;
 }
 nav {
@@ -46,7 +46,8 @@ nav a {
 /* https://www.w3schools.com/html/html_tables.asp */
 table {
     border-collapse: collapse;
-    width: 50%;
+    width: 100%;
+    text-align: center;
 }
 
 td, th {
@@ -83,11 +84,11 @@ input {
      background-color: #4CAF50; /* Green */
      border: none;
      color: white;
-     padding: 10px 15px;
+     padding: 5px 8px;
      text-align: center;
      text-decoration: none;
      display: inline-block;
-     font-size: 15px;
+     font-size: 12px;
      border-radius: 2px; /* https://www.w3schools.com/css/css3_borders.asp */
      box-shadow: 1px 1px 1px #888888;
      -webkit-transition-duration: 0.1s; /* Safari */
@@ -95,18 +96,16 @@ input {
  }
 
 .btn1 {
-    background-color: #4CAF50; /* Green */
-    border: none;
+    background-color: #4CAF50; /* Green */;
     color: white;
-    padding: 5px 7px;
+    padding: .50rem .75rem;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 20px;
-=======
-    font-size: 15px;
-    border-radius: 2px; /* https://www.w3schools.com/css/css3_borders.asp */
+    font-size: 1rem;
     box-shadow: 1px 1px 1px #888888;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: .25rem;
     -webkit-transition-duration: 0.1s; /* Safari */
     transition-duration: 0.1s;
 }

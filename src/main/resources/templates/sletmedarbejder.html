@@ -8,7 +8,7 @@
 <body>
 
 <div class="container">
-    <h1>Delete</h1>
+    <h1>Slet</h1>
 
 
     <h2>Er du sikker du vil slette?</h2>
@@ -17,11 +17,12 @@
 
     <form action="/sletmedarbejder"method="post">
         <input type="hidden" th:value="${medarbejder.username}"name="username">
-        <input type="submit"value="Yes" class="btn-del">
+        <input type="submit"value="Ja" class="btn btn-del">
+        <br>
         <br>
     </form>
     <form action="/semedarbejderliste"method="get">
-        <input type="submit"value="No" class="btn">
+        <input type="submit"value="Nej" class="btn btn-ed">
     </form>
 </div>
 <body>
