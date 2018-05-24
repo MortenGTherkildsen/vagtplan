@@ -91,6 +91,11 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
                 "uselog ='" + medarbejder.getUselog() + "' , "+
                 "' WHERE username = '" + medarbejder.getUsername() + "'");
     }
+    @Override
+    public void slet(String username) {
+
+        jdbcTemplate.update("DELETE FROM vagtplantestdb.medarbejdere WHERE medarbejdere.username='" + username + "'");
+    }
     //*******************************************
     //VAGTBEHOV
     //*******************************************
@@ -240,9 +245,5 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
     public void redigerForbehold(Forbehold forbehold){
     }
 
-    @Override
-    public void slet(String username) {
 
-        jdbcTemplate.update("DELETE FROM vagtplantestdb.medarbejdere WHERE medarbejdere.username='" + username + "'");
-    }
 }

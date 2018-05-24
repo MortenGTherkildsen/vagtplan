@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 
@@ -92,14 +95,6 @@ public class VagtansvarligController {
         return "forbeholdsliste";
     }
 
-//    @GetMapping("forbeholdsliste")
-//    public String seForbeholdsliste (@RequestParam("username") String username, Model model){
-//        model.addAttribute("/forbeholdsliste_for_"+ username, vagtansvarligRepository.seForbeholdsListe(username));
-//
-//        return "forbeholdsliste";
-//
-//    }
-
     @GetMapping("/opretforbehold")
     public String opretforbehold(Model model){
         Forbehold forbehold = new Forbehold();
@@ -108,12 +103,13 @@ public class VagtansvarligController {
     }
 
     @PostMapping("/opretforbehold")
-    public String opretforbeholdformedarbejder (@ModelAttribute("forbehold") Forbehold forbehold,
-                                  @RequestParam("username") String username, Model model){
-
+    public String opretforbeholdformedarbejder (@RequestParam ("dato")String dato ,
+                                                @RequestParam ("kommentar") String kommentar,
+                                                @RequestParam("username") String username, Model model){
         Medarbejder medarbejder = vagtansvarligRepository.getMedarbejder(username);
-        vagtansvarligRepository.opretForbehold(forbehold, medarbejder.getUsername());
-       return "redirect:/medarbejder?=" + medarbejder.getUsername();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        vagtansvarligRepository.opretForbehold(new Forbehold(LocalDate.parse(dato,format),kommentar),medarbejder.getUsername());
+        return "redirect:/medarbejder?username=" + medarbejder.getUsername();
     }
 
     @GetMapping("opretvagtbehov")
@@ -133,9 +129,12 @@ public class VagtansvarligController {
     }
 
     @PostMapping("/opretmedarbejder")
-    public String getopret(@ModelAttribute Medarbejder medarbejder) {
-        vagtansvarligRepository.opretMedarbejder(medarbejder);
-        return "redirect:/semedarbejderliste";
+    public String getopret(@ModelAttribute Medarbejder medarbejder) throws SQLException {
+       try {
+           vagtansvarligRepository.opretMedarbejder(medarbejder);
+           return "redirect:/semedarbejderliste";
+       }catch (SQLException e){
+        return "redirect:/fejlside";}
     }
 
     @PostMapping("/opdatermedarbejder")
@@ -160,5 +159,9 @@ public class VagtansvarligController {
     public String delete(@ModelAttribute("username") String username) {
         vagtansvarligRepository.slet(username);
         return "redirect:/semedarbejderliste";
+    }
+    @GetMapping ("fejlside")
+    public String fejl(){
+        return "fejlside";
     }
 }
