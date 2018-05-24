@@ -28,10 +28,11 @@
             <td th:text="${medarbejder.name}"></td>
             <td th:text="${medarbejder.initialer}"></td>
             <td th:text="${medarbejder.telefonnummer}"></td>
-            <td><a th:href="${'/medarbejder?username='+medarbejder.username}" class="btn btn-details">Se mere...</a>
-                 <a href="/semedarbejdersforbeholdsliste" class="btn btn-ed">Se Forbeholdsliste</a>
+            <td>
+                <a th:href="${'/medarbejder?username='+medarbejder.username}" class="btn btn-details">Se mere...</a>
+                <a href="/semedarbejdersforbeholdsliste" class="btn btn-ed">Se Forbeholdsliste</a>
                 <a th:href="${'/opretforbehold?username='+medarbejder.username}" class="btn btn-create">Opret forbehold</a>
-                <!--<a href="/deletemedarbejder" class="btn btn-del">Slet Medarbejder</a>-->
+                <a th:href="${'/sletmedarbejder?username='+medarbejder.username}" class="btn btn-del">Slet Medarbejder</a>
 
             </td>
         </tr>
@@ -39,7 +40,6 @@
         </tbody>
 
     </table>
-    <a href="/opretmedarbejder" class="btn">Create</a>
 
 </div>
 </body>

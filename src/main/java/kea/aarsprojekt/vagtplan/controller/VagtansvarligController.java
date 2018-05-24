@@ -153,4 +153,16 @@ public class VagtansvarligController {
         model.addAttribute("medarbejder", vagtansvarligRepository.getMedarbejder(username));
         return "opdatermedarbejder";
     }
+    @GetMapping("/sletmedarbejder")
+    public String delete(@RequestParam("username") String username, Model model) {
+        Medarbejder medarbejder = vagtansvarligRepository.getMedarbejder(username);
+        model.addAttribute("medarbejder", medarbejder);
+        return "sletmedarbejder";
+    }
+
+    @PostMapping("/sletmedarbejder")
+    public String delete(@ModelAttribute("username") String username) {
+        vagtansvarligRepository.slet(username);
+        return "redirect:/semedarbejderliste";
+    }
 }

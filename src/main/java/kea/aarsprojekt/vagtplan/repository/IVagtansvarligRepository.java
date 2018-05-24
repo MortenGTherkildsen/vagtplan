@@ -23,7 +23,7 @@ public interface IVagtansvarligRepository {
     //void opretForbehold(LocalDate dato, String kommentar, String username);
     void opretForbehold(Forbehold forbehold, String username);
     void redigerForbehold(Forbehold forbehold);
-
+    void slet(String username);
     ArrayList<Vagtbehov> visVagtbehovsListe();
 
     void opretVagtbehov(Vagtbehov vagtbehov);

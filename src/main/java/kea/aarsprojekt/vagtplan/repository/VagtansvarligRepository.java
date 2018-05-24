@@ -280,4 +280,10 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
     public void redigerForbehold(Forbehold forbehold){
     }
 
+    @Override
+    public void slet(String username) {
+
+        jdbcTemplate.update("DELETE FROM vagtplantestdb.medarbejdere WHERE medarbejdere.username='" + username + "'");
+    }
+
 }
