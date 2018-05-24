@@ -28,8 +28,6 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
 
         while (sqlRowSet.next()) {
                 ArrayList<Forbehold> forbeholdsliste = new ArrayList<>();
-//                String sql_forbehold = "SELECT * FROM vagtplantestdb.forbehold";
-//                sqlRowSet2 = jdbcTemplate.queryForRowSet(sql_forbehold);
 
             medarbejderliste.add(new Medarbejder(sqlRowSet.getString("username"),
                     sqlRowSet.getString("password"),
@@ -82,20 +80,6 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
         }
         return null;
     }
-
-//    @Override
-//    public void opdaterMedarbejder(String username, String navn, String initialer, String telefonnummer, String visivagtplan, int medarbejderstatus, String uselog){
-//
-//        jdbcTemplate.update("UPDATE vagtplantestdb.medarbejdere SET " +
-//                "navn ='" + navn + "', " +
-//                "initialer='" + initialer +"', " +
-//                "telefonnummer ='" + telefonnummer +"', " +
-//                "visivagtplan ='" + visivagtplan + "', " +
-//                "medarbejderstatus ='" + medarbejderstatus + "', " +
-//                "uselog ='" + uselog + "'," +
-//                "' WHERE username = '" + username +"'");
-//
-//    }
 
     public void opdaterMedarbejder(Medarbejder medarbejder){
         jdbcTemplate.update("UPDATE vagtplantestdb.medarbejdere SET " +
@@ -246,14 +230,10 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
 
     @Override
     public void opretForbehold(Forbehold forbehold, String userName){
-
-
-
         String sql = "INSERT INTO vagtplantestdb.forbehold (dato, kommentar, fk_username_forbehold) " +
                 "VALUES (" + forbehold.getDato() + ", '" + forbehold.getKommentar() + "', '" + userName + "')";
 
         jdbcTemplate.update(sql);
-
     }
 
     @Override
@@ -265,5 +245,4 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
 
         jdbcTemplate.update("DELETE FROM vagtplantestdb.medarbejdere WHERE medarbejdere.username='" + username + "'");
     }
-
 }
