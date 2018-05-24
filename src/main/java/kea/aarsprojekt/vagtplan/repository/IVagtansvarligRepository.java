@@ -6,6 +6,7 @@ import kea.aarsprojekt.vagtplan.model.Vagtbehov;
 import kea.aarsprojekt.vagtplan.model.Vagtplan;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 public interface IVagtansvarligRepository {
 
     ArrayList<Medarbejder> visMedarbejderListe();
-    void opretMedarbejder(Medarbejder medarbejder);
+    void opretMedarbejder(Medarbejder medarbejder) throws SQLException;
 //    void opretMedarbejder(String username, String navn, String initialer, String telefonnummer, String visivagtplan, int medarbejderstatus, String uselog);
 //    void opdaterMedarbejder(String username, String navn, String initialer, String telefonnummer, String visivagtplan, int medarbejderstatus, String uselog);
 

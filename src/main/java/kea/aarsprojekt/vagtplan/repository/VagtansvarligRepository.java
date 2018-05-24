@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -49,21 +50,33 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
         return medarbejderliste;
     }
 
-    public void opretMedarbejder(Medarbejder medarbejder){
+//    public void opretMedarbejder(Medarbejder medarbejder){
+//
+//        jdbcTemplate.update("INSERT INTO vagtplantestdb.medarbejdere " +
+//                "(username, password, role, navn, initialer, telefonnummer, visivagtplan, medarbejderstatus, vagtansvarligsemail) " +
+//                "VALUES ('" + medarbejder.getUsername() + "' , '" +
+//                medarbejder.getPassword() + "' , 'medarbejder' , '" +
+//                medarbejder.getName() + "' , '"+
+//                medarbejder.getInitialer() + "' , '" +
+//                medarbejder.getTelefonnummer() + "' , '" +
+//                medarbejder.getName() + "' , '" +
+//                1 + "' , '" +
+//                medarbejder.getMinVagtansvarlige() + "') ");
+//
+//        ArrayList<Forbehold> forbeholdsliste = new ArrayList<>();
+//        medarbejder.setForbeholdsliste(forbeholdsliste);
+//    }
 
-        jdbcTemplate.update("INSERT INTO vagtplantestdb.medarbejdere " +
-                "(username, password, role, navn, initialer, telefonnummer, visivagtplan, medarbejderstatus, vagtansvarligsemail) " +
-                "VALUES ('" + medarbejder.getUsername() + "' , '" +
-                medarbejder.getPassword() + "' , 'medarbejder' , '" +
-                medarbejder.getName() + "' , '"+
-                medarbejder.getInitialer() + "' , '" +
-                medarbejder.getTelefonnummer() + "' , '" +
-                medarbejder.getName() + "' , '" +
-                1 + "' , '" +
-                medarbejder.getMinVagtansvarlige() + "') ");
+    public void opretMedarbejder(Medarbejder medarbejder) throws SQLException{
 
-        ArrayList<Forbehold> forbeholdsliste = new ArrayList<>();
-        medarbejder.setForbeholdsliste(forbeholdsliste);
+        String sql = "INSERT INTO vagtplantestdb.medarbejdere " +
+                "(username, password, role, navn, initialer, telefonnummer, " +
+                "visivagtplan, medarbejderstatus, vagtansvarligsemail) VALUES (?,?,?,?,?,?,?,?,?)";
+
+        Object[] args = {medarbejder.getUsername(), medarbejder.getPassword(), medarbejder.getRole(), medarbejder.getName(), medarbejder.getInitialer(), medarbejder. getTelefonnummer(), medarbejder.getVisIVagtplan(), medarbejder.getUselog(), medarbejder.getMinVagtansvarlige()};
+
+        jdbcTemplate.update(sql, args);
+
     }
 
     @Override

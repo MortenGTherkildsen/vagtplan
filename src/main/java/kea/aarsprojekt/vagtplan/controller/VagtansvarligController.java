@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 
@@ -133,9 +134,12 @@ public class VagtansvarligController {
     }
 
     @PostMapping("/opretmedarbejder")
-    public String getopret(@ModelAttribute Medarbejder medarbejder) {
-        vagtansvarligRepository.opretMedarbejder(medarbejder);
-        return "redirect:/semedarbejderliste";
+    public String getopret(@ModelAttribute Medarbejder medarbejder) throws SQLException {
+        try {
+            vagtansvarligRepository.opretMedarbejder(medarbejder);
+            return "redirect:/semedarbejderliste";
+        }catch (SQLException e){
+        return "redirect:/errorpage";}
     }
 
     @PostMapping("/opdatermedarbejder")
