@@ -6,9 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @Repository
@@ -30,8 +28,6 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
 
         while (sqlRowSet.next()) {
                 ArrayList<Forbehold> forbeholdsliste = new ArrayList<>();
-//                String sql_forbehold = "SELECT * FROM vagtplantestdb.forbehold";
-//                sqlRowSet2 = jdbcTemplate.queryForRowSet(sql_forbehold);
 
             medarbejderliste.add(new Medarbejder(sqlRowSet.getString("username"),
                     sqlRowSet.getString("password"),
@@ -49,21 +45,15 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
         return medarbejderliste;
     }
 
-    public void opretMedarbejder(Medarbejder medarbejder){
+    public void opretMedarbejder(Medarbejder medarbejder) throws SQLException{
 
-        jdbcTemplate.update("INSERT INTO vagtplantestdb.medarbejdere " +
-                "(username, password, role, navn, initialer, telefonnummer, visivagtplan, medarbejderstatus, vagtansvarligsemail) " +
-                "VALUES ('" + medarbejder.getUsername() + "' , '" +
-                medarbejder.getPassword() + "' , 'medarbejder' , '" +
-                medarbejder.getName() + "' , '"+
-                medarbejder.getInitialer() + "' , '" +
-                medarbejder.getTelefonnummer() + "' , '" +
-                medarbejder.getName() + "' , '" +
-                1 + "' , '" +
-                medarbejder.getMinVagtansvarlige() + "') ");
+        String sql = "INSERT INTO vagtplantestdb.medarbejdere " +
+                "(username, password, role, navn, initialer, telefonnummer, " +
+                "visivagtplan, medarbejderstatus, vagtansvarligsemail) VALUES (?,?,?,?,?,?,?,?,?)";
 
-        ArrayList<Forbehold> forbeholdsliste = new ArrayList<>();
-        medarbejder.setForbeholdsliste(forbeholdsliste);
+        Object[] args = {medarbejder.getUsername(), medarbejder.getPassword(), "medarbejder", medarbejder.getName(), medarbejder.getInitialer(), medarbejder. getTelefonnummer(), medarbejder.getVisIVagtplan(), medarbejder.getUselog(), medarbejder.getMinVagtansvarlige()};
+
+        jdbcTemplate.update(sql, args);
     }
 
     @Override
@@ -90,20 +80,6 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
         }
         return null;
     }
-
-//    @Override
-//    public void opdaterMedarbejder(String username, String navn, String initialer, String telefonnummer, String visivagtplan, int medarbejderstatus, String uselog){
-//
-//        jdbcTemplate.update("UPDATE vagtplantestdb.medarbejdere SET " +
-//                "navn ='" + navn + "', " +
-//                "initialer='" + initialer +"', " +
-//                "telefonnummer ='" + telefonnummer +"', " +
-//                "visivagtplan ='" + visivagtplan + "', " +
-//                "medarbejderstatus ='" + medarbejderstatus + "', " +
-//                "uselog ='" + uselog + "'," +
-//                "' WHERE username = '" + username +"'");
-//
-//    }
 
     public void opdaterMedarbejder(Medarbejder medarbejder){
         jdbcTemplate.update("UPDATE vagtplantestdb.medarbejdere SET " +
@@ -254,13 +230,10 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
 
     @Override
     public void opretForbehold(Forbehold forbehold, String userName){
-
-
         String sql = "INSERT INTO vagtplantestdb.forbehold (dato, kommentar, fk_username_forbehold) " +
                 "VALUES ('" + forbehold.getDato() + "', '" + forbehold.getKommentar() + "', '" + userName + "')";
 
         jdbcTemplate.update(sql);
-
     }
 
     @Override
@@ -272,5 +245,4 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
 
         jdbcTemplate.update("DELETE FROM vagtplantestdb.medarbejdere WHERE medarbejdere.username='" + username + "'");
     }
-
 }

@@ -1,7 +1,6 @@
 package kea.aarsprojekt.vagtplan.model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class Forbehold {
 

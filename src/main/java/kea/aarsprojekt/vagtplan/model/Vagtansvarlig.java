@@ -1,8 +1,6 @@
 package kea.aarsprojekt.vagtplan.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -50,7 +48,6 @@ public class Vagtansvarlig extends Medarbejder{
         this.vagtplansListe = vagtplansListe;
     }
 
-    @Autowired
 
     public Medarbejder opretMedarbejder(String username){// TODO: 12-05-2018
 
@@ -65,7 +62,6 @@ public class Vagtansvarlig extends Medarbejder{
         medarbejder.setMedarbejderStatus(medarbejderStatus);
         }
 
-
     public Medarbejder getMedarbejder(String username){
             Medarbejder medarbejder_holder = null;
             for (Medarbejder medarbejder:medarbejderListe) {
@@ -75,7 +71,6 @@ public class Vagtansvarlig extends Medarbejder{
             return medarbejder_holder;
         }
 
-    @Autowired
     public ArrayList<Medarbejder> seMedarbejderListe(){// TODO: 12-05-2018
         return medarbejderListe;
         }
@@ -90,8 +85,6 @@ public class Vagtansvarlig extends Medarbejder{
     public ArrayList<Vagtbehov> getVagtbehovsListe(){
             return vagtbehovsListe;
         }
-
-
 
     public void redigerVagtbehov(){// TODO: 12-05-2018
         }
