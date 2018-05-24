@@ -7,9 +7,6 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 @Repository
@@ -59,7 +56,6 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
         Object[] args = {medarbejder.getUsername(), medarbejder.getPassword(), "medarbejder", medarbejder.getName(), medarbejder.getInitialer(), medarbejder. getTelefonnummer(), medarbejder.getVisIVagtplan(), medarbejder.getUselog(), medarbejder.getMinVagtansvarlige()};
 
         jdbcTemplate.update(sql, args);
-
     }
 
     @Override
