@@ -88,7 +88,7 @@ public class VagtansvarligRepository implements IVagtansvarligRepository {
                 "telefonnummer ='" + medarbejder.getTelefonnummer() +"' , "+
                 "visivagtplan ='" + medarbejder.getVisIVagtplan() + "' , "+
                 "medarbejderstatus ='" + medarbejder.getMedarbejderStatus() + "' , "+
-                "uselog ='" + medarbejder.getUselog() + "' , "+
+                "uselog ='" + medarbejder.getUselog()+
                 "' WHERE username = '" + medarbejder.getUsername() + "'");
     }
     @Override
