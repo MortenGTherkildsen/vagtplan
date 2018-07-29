@@ -6,26 +6,30 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <div class="container">
-    <h1>Slet</h1>
 
+    <h1>Slet medarbejder</h1>
 
-    <h2>Er du sikker du vil slette?</h2>
-    <p th:text="${medarbejder.username + ' ' + medarbejder.name}"> </p>
-
+    <h2>Er du sikker på, at du vil slette denne medarbejder?</h2>
+    <p th:text="${'Brugernavn (email): ' + medarbejder.username}"> </p>
+    <p th:text="${'Navn: ' + medarbejder.name}"> </p>
 
     <form action="/sletmedarbejder"method="post">
+
         <input type="hidden" th:value="${medarbejder.username}"name="username">
         <input type="submit"value="Ja" class="btn btn-del">
         <br>
         <br>
+
     </form>
+
     <form action="/semedarbejderliste"method="get">
+
         <input type="submit"value="Nej" class="btn btn-ed">
+
     </form>
+
 </div>
 <body>
-
 </body>
 </html>

@@ -1,9 +1,6 @@
 package kea.aarsprojekt.vagtplan.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Medarbejder {
@@ -118,7 +115,7 @@ public class Medarbejder {
     }
 
     public void redigerForbehold(Forbehold forbehold){
-        // TODO: 07-05-2018
+        //forbeholdsliste.set(forbehold);
     }
 
     public ArrayList<Forbehold> getForbeholdsliste() {

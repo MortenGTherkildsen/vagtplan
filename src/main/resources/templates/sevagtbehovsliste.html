@@ -8,11 +8,10 @@
 <body>
 <div class="container">
 
-
-
-    <h1>Vagebehov</h1>
+    <h1>Vagtbehov</h1>
 
     <table>
+
         <thead>
         <tr>
             <th>ID</th>
@@ -21,6 +20,7 @@
             <th>Kommentar</th>
         </tr>
         </thead>
+
         <tbody>
         <tr th:each="vagtbehov : ${vagtbehov}">
             <td th:text="${vagtbehov.id}"></td>
@@ -29,13 +29,12 @@
             <td th:text="${vagtbehov.kommentar}"></td>
             <td></td>
         </tr>
-
         </tbody>
 
     </table>
-    <a href="/opretvagtbehov" class="btn">Create</a>
+
+    <a href="/opretvagtbehov" class="btn">Opret vagtbehov</a>
 
 </div>
-
 </body>
 </html>

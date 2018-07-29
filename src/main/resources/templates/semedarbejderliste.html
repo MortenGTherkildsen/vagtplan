@@ -7,20 +7,25 @@
 </head>
 <body>
 <div class="container1">
-    <h1>Personale</h1>
-    <a  href="/opretmedarbejder" class="btn" >Tilføj Ny Medarbejder</a>
+
+    <h1>Medarbejdere</h1>
+
+    <a  href="/opretmedarbejder" class="btn" >Tilføj ny medarbejder</a>
     <br>
+
     <table>
+
         <thead>
         <tr>
             <th>Brugernavn (email)</th>
             <th>Rolle</th>
             <th>Navn</th>
-            <th>Intilaler</th>
+            <th>Initialer</th>
             <th>Telefon</th>
             <th></th>
         </tr>
         </thead>
+
         <tbody>
         <tr th:each="medarbejder : ${medarbejderliste}">
             <td th:text="${medarbejder.username}"></td>
@@ -32,11 +37,9 @@
                 <a th:href="${'/medarbejder?username='+medarbejder.username}" class="btn btn-details">Se mere...</a>
                 <!--a href="/semedarbejdersforbeholdsliste" class="btn btn-ed">Se Forbeholdsliste</a>-->
                 <a th:href="${'/opretforbehold?username='+medarbejder.username}" class="btn btn-ed">Opret forbehold</a>
-                <a th:href="${'/sletmedarbejder?username='+medarbejder.username}" class="btn btn-del">Slet Medarbejder</a>
-
+                <a th:href="${'/sletmedarbejder?username='+medarbejder.username}" class="btn btn-del">Slet medarbejder</a>
             </td>
         </tr>
-
         </tbody>
 
     </table>
