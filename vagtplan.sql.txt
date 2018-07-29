@@ -1,84 +1,169 @@
-drop schema if exists vagtplantestdb;
-CREATE SCHEMA `vagtplantestdb` DEFAULT CHARACTER SET utf8;
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: vagtplantestdb
+-- ------------------------------------------------------
+-- Server version	5.7.21-log
 
-use vagtplantestdb;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-drop table if exists medarbejdere;
-CREATE TABLE `medarbejdere` (
-  `username` varchar(70) NOT NULL,
-  `password` varchar(255) NULL,
-  `role` varchar(70) NOT NULL,
-  `navn` varchar(70) NULL,
-  `initialer` varchar(5) NULL,
-  `telefonnummer` varchar(20) NULL,
-  `visivagtplan` varchar(70) NULL,
-  `medarbejderstatus` int NULL,
-  `uselog` varchar(4500) NULL,
-  `vagtansvarligsemail` varchar(70) NOT NULL,
-  PRIMARY KEY (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+--
+-- Table structure for table `forbehold`
+--
 
-drop table if exists forbehold;
+DROP TABLE IF EXISTS `forbehold`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forbehold` (
-  `forbeholdid` int NOT NULL AUTO_INCREMENT,
-  `dato` date NULL,
-  `kommentar` varchar(450) NULL,
+  `forbeholdid` int(11) NOT NULL AUTO_INCREMENT,
+  `dato` date DEFAULT NULL,
+  `kommentar` varchar(450) DEFAULT NULL,
   `fk_username_forbehold` varchar(70) NOT NULL,
   PRIMARY KEY (`forbeholdid`),
   KEY `fk_username_idx` (`fk_username_forbehold`),
-  CONSTRAINT `fk_username_forbehold` FOREIGN KEY (`fk_username_forbehold`) REFERENCES `medarbejdere` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_username_forbehold` FOREIGN KEY (`fk_username_forbehold`) REFERENCES `medarbejdere` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-drop table if exists vagtbehov;
+--
+-- Dumping data for table `forbehold`
+--
+
+LOCK TABLES `forbehold` WRITE;
+/*!40000 ALTER TABLE `forbehold` DISABLE KEYS */;
+INSERT INTO `forbehold` VALUES (2,'2018-06-06','Jeg har fødselsdag','martin@blirup.dk'),(4,'2018-12-01','Jeg har en aftale','martin@blirup.dk'),(6,'2018-12-02','Jeg har to aftaler','martin@blirup.dk'),(10,'2018-12-08','Min kone kan føde når som helst','josef@therkildsen.com'),(11,'2018-12-09','Min kone kan føde når som helst','josef@therkildsen.com'),(12,'2018-12-10','Jeg har en aftale','martin@blirup.dk'),(13,'2018-12-04','Min kone kan føde når som helst','josef@therkildsen.com'),(14,'2018-12-06','Jeg har en aftale','martin@blirup.dk'),(15,'2018-12-18','Min kone kan føde når som helst','josef@therkildsen.com'),(16,'2018-12-18','Jeg har to aftaler','martin@blirup.dk'),(17,'2018-12-24','Jeg blir måske far','josef@therkildsen.com'),(18,'2018-12-12','Min kone kan føde når som helst','josef@therkildsen.com'),(20,'2018-12-18','Jeg skal hjem og se Mortens kongekobra','moses@therkildsen.com'),(22,'2018-12-11','Jeg har ondt i maven','jannik@therkildsen.com'),(23,'2018-12-12','Jeg skal til lægen igen','jannik@therkildsen.com'),(24,'2018-12-16','Jeg har en aftale','martin@blirup.dk'),(25,'2018-12-14','Jeg er gravid og kan føde når som helst','jannik@therkildsen.com'),(26,'2018-12-22','Jeg har to aftaler','martin@blirup.dk'),(27,'2018-12-16','Jeg har født en kongekobra','jannik@therkildsen.com'),(28,'2018-12-29','Jeg er træt','josef@therkildsen.com'),(29,'2018-12-18','Jeg har købt en kongekobra og i dag skal den døbes','morten@therkildsen.com'),(30,'2018-12-28','Jeg har en aftale med Buddha','moses@therkildsen.com'),(31,'2018-12-03','Jeg har fået en grå stær, den skal steriliseres','salik@therkildsen.com'),(32,'2018-12-06','Min cykel er blevet stjålet','peter@therkildsen.com'),(33,'2018-12-10','Jeg tager til Lalandia på badeferie','maria@therkildsen.com'),(34,'2018-12-20','Jeg skal forberede mig på ikke at vinde mandlen','peter@therkildsen.com'),(35,'2018-12-12','Jeg skal til skoletandlægen','muhammed@therkildsen.com'),(36,'2018-12-13','Jeg skal arbejde på mit andet job','jannik@therkildsen.com'),(37,'2018-12-14','Jeg skal være Luciabrud','peter@therkildsen.com'),(38,'2018-12-15','Min mor er min bror. Jeg skal til psykolog.','maria@therkildsen.com'),(39,'2018-12-16','Min stær skal have briller','salik@therkildsen.com'),(40,'2018-12-17','Jeg skal i skole','muhammed@therkildsen.com'),(41,'2018-12-18','Jeg skal arbejde på mit andet job','jannik@therkildsen.com'),(42,'2018-12-19','Jeg skal til skoletandlægen','maria@therkildsen.com'),(43,'2018-12-19','Jeg skal i skole','peter@therkildsen.com'),(44,'2018-12-20','Min grå stær er død','salik@therkildsen.com'),(45,'2018-12-20','Min far er min søster. Endnu en tur til psykolog','maria@therkildsen.com'),(46,'2018-12-21','Min hund har spist min tandbørste','poul@therkildsen.com'),(47,'2018-12-21','Jeg skal arbejde på mit andet job','muhammed@therkildsen.com'),(48,'2018-12-21','Jeg har fået sars i arse','salik@therkildsen.com'),(49,'2018-12-22','Jeg skal ud til Amalie','peter@therkildsen.com'),(50,'2018-12-22','Myre i min havregryn, nu har jeg roskildesyge','peter@therkildsen.com'),(51,'2018-12-22','Jeg skal i skole','jannik@therkildsen.com'),(52,'2018-12-22','Jeg skal ud og hente min nye grønne stær','salik@therkildsen.com'),(53,'2018-12-23','Min hund har spist mit dørhåndtag. Jeg kan ikke komme ud','poul@therkildsen.com'),(54,'2018-12-23','Muhammed og Jeg skal skilles','maria@therkildsen.com'),(55,'2018-12-23','Maria og Jeg skal skilles','muhammed@therkildsen.com'),(56,'2018-12-24','Jeg skal arbejde på mit andet job','poul@therkildsen.com'),(57,'2018-12-24','Jeg skal i skole','peter@therkildsen.com'),(58,'2018-12-24','Jeg skal til skoletandlægen','salik@therkildsen.com'),(59,'2018-12-25','Jeg skal i byen og score','muhammed@therkildsen.com'),(60,'2018-12-25','Jeg skal med Muahmmed i byen','peter@therkildsen.com'),(61,'2018-12-25','Jeg skal arbejde på mit andet job','martin@blirup.dk'),(62,'2018-12-26','Min hund har spist min busbillet','poul@therkildsen.com'),(63,'2018-12-26','Jeg skal i skole','salik@therkildsen.com'),(64,'2018-12-26','Min ven, Morten, er død. Nu er jeg helt alene. Jeg har bestilt en grædekone','peter@therkildsen.com'),(65,'2018-12-27','Skuespillerne drillede mig på min seneste vagt. Jeg kommer ikke foreløbigt...','maria@therkildsen.com'),(66,'2018-12-27','Jeg skal se Game of Thrones','peter@therkildsen.com'),(67,'2018-12-27','Morten giver mig stress','salik@therkildsen.com'),(68,'2018-12-28','Min kæreste er mormon, det kræver sgu en fridag','jannik@therkildsen.com'),(69,'2018-12-28','Jeg står for at skulle lave en seriøs omgang hummus. En god hummus tager tid.','muhammed@therkildsen.com'),(70,'2018-12-28','Min hund har spist mine arbejdssko','poul@therkildsen.com'),(71,'2018-12-29','Jeg skal til skoletandlægen','jannik@therkildsen.com'),(72,'2018-12-29','Mit knæ har fået kræft','maria@therkildsen.com'),(73,'2018-12-29','Min bror er kommet på hospitalet','peter@therkildsen.com'),(74,'2018-12-30','Jeg skal bruge dagen på at meditere','muhammed@therkildsen.com'),(75,'2018-12-30','Min livmoder er blevet enke','maria@therkildsen.com'),(76,'2018-12-30','Jeg tager til Jylland','salik@therkildsen.com'),(77,'2018-12-31','Jeg regner med at få fnat i julegave, det bryder ud en uge senere formoder jeg','jannik@therkildsen.com'),(78,'2018-12-31','Jeg skal til begravelse','peter@therkildsen.com'),(79,'2018-12-31','Jeg fejrer nytår på Kreta','salik@therkildsen.com'),(81,'2018-07-27','Jeg skal til fest','hestelotte@gmail.com');
+/*!40000 ALTER TABLE `forbehold` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `medarbejdere`
+--
+
+DROP TABLE IF EXISTS `medarbejdere`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `medarbejdere` (
+  `username` varchar(70) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `role` varchar(70) NOT NULL,
+  `navn` varchar(70) DEFAULT NULL,
+  `initialer` varchar(5) DEFAULT NULL,
+  `telefonnummer` varchar(20) DEFAULT NULL,
+  `visivagtplan` varchar(70) DEFAULT NULL,
+  `medarbejderstatus` int(11) DEFAULT NULL,
+  `uselog` varchar(4500) DEFAULT NULL,
+  `vagtansvarligsemail` varchar(70) NOT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `medarbejdere`
+--
+
+LOCK TABLES `medarbejdere` WRITE;
+/*!40000 ALTER TABLE `medarbejdere` DISABLE KEYS */;
+INSERT INTO `medarbejdere` VALUES ('hestelotte@gmail.com','12345666','medarbejder','Lotte Hest','LH','13245666',NULL,NULL,NULL,'morten@therkildsen.com'),('jannik@therkildsen.com','123456','medarbejder','Jannik','jan','45623456','Jannik',1,NULL,'morten@therkildsen.com'),('jesus@therkildsen.com','123456','medarbejder','Jesus','jes','45623456','Jesus',1,NULL,'morten@therkildsen.com'),('josef@therkildsen.com','123456','medarbejder','Josef','jos','28408191','Josef',1,NULL,'morten@therkildsen.com'),('maria@therkildsen.com','123456','medarbejder','Maria','maa','28408191','Maria',1,NULL,'morten@therkildsen.com'),('martin@blirup.dk','123456','medarbejder','Martin','mar','45623456','Martin',1,NULL,'morten@therkildsen.com'),('morten@therkildsen.com','123456','vagtansvarlig','Morten','mth','28408191','Morten',1,NULL,'morten@therkildsen.com'),('moses@therkildsen.com','123456','medarbejder','Moses','mos','28408191','Moses',1,NULL,'morten@therkildsen.com'),('muhammed@therkildsen.com','123456','medarbejder','Muhammed','muh','28408191','Muhammed',1,NULL,'morten@therkildsen.com'),('peter@therkildsen.com','123456','medarbejder','Peter','pet','45698778','Peter',1,NULL,'morten@therkildsen.com'),('poul@therkildsen.com','123456','medarbejder','Poul','pou','45623456','Poul',1,NULL,'morten@therkildsen.com'),('salik@therkildsen.com','123456','medarbejder','Salik','sal','45623456','Salik',1,NULL,'morten@therkildsen.com');
+/*!40000 ALTER TABLE `medarbejdere` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `vagtbehov`
+--
+
+DROP TABLE IF EXISTS `vagtbehov`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `vagtbehov` (
-  `vagtbehovid` int NOT NULL auto_increment,
+  `vagtbehovid` int(11) NOT NULL AUTO_INCREMENT,
   `fra` datetime NOT NULL,
   `til` datetime NOT NULL,
   `titel` varchar(45) NOT NULL,
-  `kommentar` varchar(450) NULL,
+  `kommentar` varchar(450) DEFAULT NULL,
   PRIMARY KEY (`vagtbehovid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-drop table if exists vagtplaner;
+--
+-- Dumping data for table `vagtbehov`
+--
+
+LOCK TABLES `vagtbehov` WRITE;
+/*!40000 ALTER TABLE `vagtbehov` DISABLE KEYS */;
+INSERT INTO `vagtbehov` VALUES (1,'2018-12-24 16:00:00','2018-12-25 03:00:00','JuleaftenBar - Kom Glad!','Vi ved jo streng taget ikke om baren lukker kl. 03, men dette program kræver at jeg udfylder feltet...'),(2,'2019-12-24 16:00:00','2019-12-25 03:00:00','JuleaftenBar - Kom Glad!','Vi ved jo streng taget ikke om baren lukker kl. 03, men dette program kræver at jeg udfylder feltet...'),(3,'2020-12-24 16:00:00','2020-12-25 03:00:00','JuleaftenBar - Kom Glad!','Vi ved jo streng taget ikke om baren lukker kl. 03, men dette program kræver at jeg udfylder feltet...'),(4,'2021-12-24 16:00:00','2021-12-25 03:00:00','JuleaftenBar - Kom Glad!','Vi ved jo streng taget ikke om baren lukker kl. 03, men dette program kræver at jeg udfylder feltet...'),(5,'2022-12-24 16:00:00','2022-12-25 03:00:00','JuleaftenBar - Kom Glad!','Vi ved jo streng taget ikke om baren lukker kl. 03, men dette program kræver at jeg udfylder feltet...'),(7,'2018-12-05 16:00:00','2018-12-05 23:00:00','Billetvagt','Husk at låse når du går hjem'),(8,'2018-12-08 16:00:00','2018-12-08 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(9,'2018-12-08 16:00:00','2018-12-08 23:00:00','Billetvagt','Husk at låse når du går hjem'),(10,'2018-12-12 16:00:00','2018-12-12 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(11,'2018-12-12 16:00:00','2018-12-12 23:00:00','Billetvagt','Husk at låse når du går hjem'),(12,'2018-12-15 16:00:00','2018-12-15 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(13,'2018-12-15 16:00:00','2018-12-15 23:00:00','Billetvagt','Husk at låse når du går hjem'),(14,'2018-12-18 16:00:00','2018-12-18 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(15,'2018-12-18 16:00:00','2018-12-18 23:00:00','Billetvagt','Husk at låse når du går hjem'),(16,'2018-12-22 16:00:00','2018-12-22 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(17,'2018-12-22 16:00:00','2018-12-22 23:00:00','Billetvagt','Husk at låse når du går hjem'),(18,'2018-12-07 00:00:00','2018-12-05 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(19,'2018-12-07 00:00:00','2018-12-05 23:00:00','Billetvagt','Husk at låse når du går hjem'),(20,'2018-12-14 16:00:00','2018-12-14 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(21,'2018-12-14 16:00:00','2018-12-14 23:00:00','Billetvagt','Husk at låse når du går hjem'),(22,'2018-12-16 16:00:00','2018-12-16 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(23,'2018-12-16 16:00:00','2018-12-16 23:00:00','Billetvagt','Husk at låse når du går hjem'),(24,'2018-12-19 16:00:00','2018-12-19 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(25,'2018-12-19 16:00:00','2018-12-19 23:00:00','Billetvagt','Husk at låse når du går hjem'),(26,'2018-12-21 16:00:00','2018-12-21 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(27,'2018-12-21 16:00:00','2018-12-21 23:00:00','Billetvagt','Husk at låse når du går hjem'),(28,'2018-12-23 16:00:00','2018-12-23 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(29,'2018-12-23 16:00:00','2018-12-23 23:00:00','Billetvagt','Husk at låse når du går hjem'),(30,'2018-12-09 16:00:00','2018-12-09 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(31,'2018-12-09 16:00:00','2018-12-09 23:00:00','Billetvagt','Husk at låse når du går hjem'),(32,'2018-12-10 16:00:00','2018-12-10 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(33,'2018-12-10 16:00:00','2018-12-10 23:00:00','Billetvagt','Husk at låse når du går hjem'),(34,'2018-12-11 16:00:00','2018-12-11 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(35,'2018-12-11 16:00:00','2018-12-11 23:00:00','Billetvagt','Husk at låse når du går hjem'),(36,'2018-12-13 16:00:00','2018-12-13 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(37,'2018-12-13 16:00:00','2018-12-13 23:00:00','Billetvagt','Husk at låse når du går hjem'),(38,'2018-12-17 16:00:00','2018-12-17 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(39,'2018-12-17 16:00:00','2018-12-17 23:00:00','Billetvagt','Husk at låse når du går hjem'),(40,'2018-12-01 16:00:00','2018-12-01 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(41,'2018-12-01 16:00:00','2018-12-01 23:00:00','Billetvagt','Husk at låse når du går hjem'),(42,'2018-12-02 16:00:00','2018-12-02 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(43,'2018-12-02 16:00:00','2018-12-02 23:00:00','Billetvagt','Husk at låse når du går hjem'),(44,'2018-12-03 16:00:00','2018-12-03 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(45,'2018-12-03 16:00:00','2018-12-03 23:00:00','Billetvagt','Husk at låse når du går hjem'),(46,'2018-12-04 16:00:00','2018-12-04 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(47,'2018-12-04 16:00:00','2018-12-04 23:00:00','Billetvagt','Husk at låse når du går hjem'),(48,'2018-12-06 16:00:00','2018-12-06 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(49,'2018-12-06 16:00:00','2018-12-06 23:00:00','Billetvagt','Husk at låse når du går hjem'),(50,'2018-12-05 16:00:00','2018-12-05 23:00:00','Barvagt','Husk at gøre rent efter forestillingen');
+/*!40000 ALTER TABLE `vagtbehov` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `vagter`
+--
+
+DROP TABLE IF EXISTS `vagter`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vagter` (
+  `vagtid` int(11) NOT NULL AUTO_INCREMENT,
+  `fk_username_vagter` varchar(70) NOT NULL,
+  `fra` datetime NOT NULL,
+  `til` datetime NOT NULL,
+  `titel` varchar(45) DEFAULT NULL,
+  `kommentar` varchar(450) DEFAULT NULL,
+  PRIMARY KEY (`vagtid`),
+  KEY `fk_username_idx` (`fk_username_vagter`),
+  CONSTRAINT `fk_username_vagter` FOREIGN KEY (`fk_username_vagter`) REFERENCES `medarbejdere` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vagter`
+--
+
+LOCK TABLES `vagter` WRITE;
+/*!40000 ALTER TABLE `vagter` DISABLE KEYS */;
+/*!40000 ALTER TABLE `vagter` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `vagtplaner`
+--
+
+DROP TABLE IF EXISTS `vagtplaner`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `vagtplaner` (
-  `vagtplanid` int NOT NULL auto_increment,
+  `vagtplanid` int(11) NOT NULL AUTO_INCREMENT,
   `titel` varchar(45) NOT NULL,
-  `kommentar` varchar(450) NULL,
+  `kommentar` varchar(450) DEFAULT NULL,
   `fra` datetime NOT NULL,
   `til` datetime NOT NULL,
   PRIMARY KEY (`vagtplanid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-drop table if exists vagter;
-CREATE TABLE `vagter` (
-  `vagtid` int NOT NULL auto_increment,
-  `fk_username` varchar(70) NOT NULL,
-  `fra` datetime NOT NULL,
-  `til` datetime NOT NULL,
-  `titel` varchar(45) NULL,
-  `kommentar` varchar(450) NULL,
-  PRIMARY KEY (`vagtid`),
-  KEY `fk_username_idx` (`fk_username`),
-  CONSTRAINT `fk_username` FOREIGN KEY (`fk_username`) REFERENCES `medarbejdere` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+--
+-- Dumping data for table `vagtplaner`
+--
 
+LOCK TABLES `vagtplaner` WRITE;
+/*!40000 ALTER TABLE `vagtplaner` DISABLE KEYS */;
+/*!40000 ALTER TABLE `vagtplaner` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-INSERT INTO `vagtplantestdb`.`medarbejdere` (`username`, `password`, `role`, `navn`, `initialer`, `telefonnummer`, `visivagtplan`, `medarbejderstatus`, `vagtansvarligsemail`) VALUES ('morten@therkildsen.com', '123456', 'vagtansvarlig', 'Morten', 'mth', '28408191', 'Morten', 1, 'morten@therkildsen.com');
-INSERT INTO `vagtplantestdb`.`medarbejdere` (`username`, `password`, `role`, `navn`, `initialer`, `telefonnummer`, `visivagtplan`, `medarbejderstatus`, `vagtansvarligsemail`) VALUES ('peter@therkildsen.com', '123456', 'medarbejder', 'Peter', 'pet', '45698778', 'Peter', 1, 'morten@therkildsen.com');
-INSERT INTO `vagtplantestdb`.`medarbejdere` (`username`, `password`, `role`, `navn`, `initialer`, `telefonnummer`, `visivagtplan`, `medarbejderstatus`, `vagtansvarligsemail`) VALUES ('poul@therkildsen.com', '123456', 'medarbejder', 'Poul', 'pou', '45623456', 'Poul', 1, 'morten@therkildsen.com');
-INSERT INTO `vagtplantestdb`.`medarbejdere` (`username`, `password`, `role`, `navn`, `initialer`, `telefonnummer`, `visivagtplan`, `medarbejderstatus`, `vagtansvarligsemail`) VALUES ('martin@blirup.dk', '123456', 'medarbejder', 'Martin', 'mar', '45623456', 'Martin', 1, 'morten@therkildsen.com');
-INSERT INTO `vagtplantestdb`.`medarbejdere` (`username`, `password`, `role`, `navn`, `initialer`, `telefonnummer`, `visivagtplan`, `medarbejderstatus`, `vagtansvarligsemail`) VALUES ('jannik@therkildsen.com', '123456', 'medarbejder', 'Jannik', 'jan', '45623456', 'Jannik', 1, 'morten@therkildsen.com');
-INSERT INTO `vagtplantestdb`.`medarbejdere` (`username`, `password`, `role`, `navn`, `initialer`, `telefonnummer`, `visivagtplan`, `medarbejderstatus`, `vagtansvarligsemail`) VALUES ('salik@therkildsen.com', '123456', 'medarbejder', 'Salik', 'sal', '45623456', 'Salik', 1, 'morten@therkildsen.com');
-INSERT INTO `vagtplantestdb`.`medarbejdere` (`username`, `password`, `role`, `navn`, `initialer`, `telefonnummer`, `visivagtplan`, `medarbejderstatus`, `vagtansvarligsemail`) VALUES ('jesus@therkildsen.com', '123456', 'medarbejder', 'Jesus', 'jes', '45623456', 'Jesus', 1, 'morten@therkildsen.com');
-INSERT INTO `vagtplantestdb`.`medarbejdere` (`username`, `password`, `role`, `navn`, `initialer`, `telefonnummer`, `visivagtplan`, `medarbejderstatus`, `vagtansvarligsemail`) VALUES ('buddha@therkildsen.com', '123456', 'medarbejder', 'Buddha', 'bud', '45623456', 'Buddha', 1, 'morten@therkildsen.com');
-INSERT INTO `vagtplantestdb`.`medarbejdere` (`username`, `password`, `role`, `navn`, `initialer`, `telefonnummer`, `visivagtplan`, `medarbejderstatus`, `vagtansvarligsemail`) VALUES ('moses@therkildsen.com', '123456', 'medarbejder', 'Moses', 'mos', '28408191', 'Moses', 1, 'morten@therkildsen.com');
-INSERT INTO `vagtplantestdb`.`medarbejdere` (`username`, `password`, `role`, `navn`, `initialer`, `telefonnummer`, `visivagtplan`, `medarbejderstatus`, `vagtansvarligsemail`) VALUES ('muhammed@therkildsen.com', '123456', 'medarbejder', 'Muhammed', 'muh', '28408191', 'Muhammed', 1, 'morten@therkildsen.com');
-INSERT INTO `vagtplantestdb`.`medarbejdere` (`username`, `password`, `role`, `navn`, `initialer`, `telefonnummer`, `visivagtplan`, `medarbejderstatus`, `vagtansvarligsemail`) VALUES ('maria@therkildsen.com', '123456', 'medarbejder', 'Maria', 'maa', '28408191', 'Maria', 1, 'morten@therkildsen.com');
-INSERT INTO `vagtplantestdb`.`medarbejdere` (`username`, `password`, `role`, `navn`, `initialer`, `telefonnummer`, `visivagtplan`, `medarbejderstatus`, `vagtansvarligsemail`) VALUES ('josef@therkildsen.com', '123456', 'medarbejder', 'Josef', 'jos', '28408191', 'Josef', 1, 'morten@therkildsen.com');
-INSERT INTO `vagtplantestdb`.`medarbejdere` (`username`, `password`, `role`, `navn`, `initialer`, `telefonnummer`, `visivagtplan`, `medarbejderstatus`, `vagtansvarligsemail`) VALUES ('amalie@therkildsen.com', '123456', 'medarbejder', 'Amalie', 'ama', '28408191', 'Amalie', 1, 'morten@therkildsen.com');
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-INSERT INTO `forbehold` VALUES (1,'2018-12-31','Jeg vil fejre nytårsaften i år, så jeg kan ikke stå i baren.','amalie@therkildsen.com'),(2,'2018-06-06','Jeg har fødselsdag','martin@blirup.dk'),(3,'2018-12-01','Jeg har ondt i tungen','amalie@therkildsen.com'),(4,'2018-12-01','Jeg har en aftale','martin@blirup.dk'),(5,'2018-12-02','Jeg har gigt i øjet','amalie@therkildsen.com'),(6,'2018-12-02','Jeg har to aftaler','martin@blirup.dk'),(7,'2018-12-04','Jeg har tinitus i kæben','amalie@therkildsen.com'),(8,'2018-12-06','Jeg har sår på mine lår','amalie@therkildsen.com'),(9,'2018-12-05','Jeg har gas','amalie@therkildsen.com'),(10,'2018-12-08','Min kone kan føde når som helst','josef@therkildsen.com'),(11,'2018-12-09','Min kone kan føde når som helst','josef@therkildsen.com'),(12,'2018-12-10','Jeg har en aftale','martin@blirup.dk'),(13,'2018-12-04','Min kone kan føde når som helst','josef@therkildsen.com'),(14,'2018-12-06','Jeg har en aftale','martin@blirup.dk'),(15,'2018-12-18','Min kone kan føde når som helst','josef@therkildsen.com'),(16,'2018-12-18','Jeg har to aftaler','martin@blirup.dk'),(17,'2018-12-24','Jeg blir måske far','josef@therkildsen.com'),(18,'2018-12-12','Min kone kan føde når som helst','josef@therkildsen.com'),(19,'2018-12-17','Jeg har stadig gas','amalie@therkildsen.com'),(20,'2018-12-18','Jeg skal hjem og se Mortens kongekobra','moses@therkildsen.com'),(21,'2018-12-18','Jeg skal hjem og se Mortens kongekobra','buddha@therkildsen.com'),(22,'2018-12-11','Jeg har ondt i maven','jannik@therkildsen.com'),(23,'2018-12-12','Jeg skal til lægen igen','jannik@therkildsen.com'),(24,'2018-12-16','Jeg har en aftale','martin@blirup.dk'),(25,'2018-12-14','Jeg er gravid og kan føde når som helst','jannik@therkildsen.com'),(26,'2018-12-22','Jeg har to aftaler','martin@blirup.dk'),(27,'2018-12-16','Jeg har født en kongekobra','jannik@therkildsen.com'),(28,'2018-12-29','Jeg er træt','josef@therkildsen.com'),(29,'2018-12-18','Jeg har købt en kongekobra og i dag skal den døbes','morten@therkildsen.com'),(30,'2018-12-28','Jeg har en aftale med Buddha','moses@therkildsen.com'),(31,'2018-12-03','Jeg har fået en grå stær, den skal steriliseres','salik@therkildsen.com'),(32,'2018-12-06','Min cykel er blevet stjålet','peter@therkildsen.com'),(33,'2018-12-10','Jeg tager til Lalandia på badeferie','maria@therkildsen.com'),(34,'2018-12-20','Jeg skal forberede mig på ikke at vinde mandlen','peter@therkildsen.com'),(35,'2018-12-12','Jeg skal til skoletandlægen','muhammed@therkildsen.com'),(36,'2018-12-13','Jeg skal arbejde på mit andet job','jannik@therkildsen.com'),(37,'2018-12-14','Jeg skal være Luciabrud','peter@therkildsen.com'),(38,'2018-12-15','Min mor er min bror. Jeg skal til psykolog.','maria@therkildsen.com'),(39,'2018-12-16','Min stær skal have briller','salik@therkildsen.com'),(40,'2018-12-17','Jeg skal i skole','muhammed@therkildsen.com'),(41,'2018-12-18','Jeg skal arbejde på mit andet job','jannik@therkildsen.com'),(42,'2018-12-19','Jeg skal til skoletandlægen','maria@therkildsen.com'),(43,'2018-12-19','Jeg skal i skole','peter@therkildsen.com'),(44,'2018-12-20','Min grå stær er død','salik@therkildsen.com'),(45,'2018-12-20','Min far er min søster. Endnu en tur til psykolog','maria@therkildsen.com'),(46,'2018-12-21','Min hund har spist min tandbørste','poul@therkildsen.com'),(47,'2018-12-21','Jeg skal arbejde på mit andet job','muhammed@therkildsen.com'),(48,'2018-12-21','Jeg har fået sars i arse','salik@therkildsen.com'),(49,'2018-12-22','Jeg skal ud til Amalie','peter@therkildsen.com'),(50,'2018-12-22','Myre i min havregryn, nu har jeg roskildesyge','peter@therkildsen.com'),(51,'2018-12-22','Jeg skal i skole','jannik@therkildsen.com'),(52,'2018-12-22','Jeg skal ud og hente min nye grønne stær','salik@therkildsen.com'),(53,'2018-12-23','Min hund har spist mit dørhåndtag. Jeg kan ikke komme ud','poul@therkildsen.com'),(54,'2018-12-23','Muhammed og Jeg skal skilles','maria@therkildsen.com'),(55,'2018-12-23','Maria og Jeg skal skilles','muhammed@therkildsen.com'),(56,'2018-12-24','Jeg skal arbejde på mit andet job','poul@therkildsen.com'),(57,'2018-12-24','Jeg skal i skole','peter@therkildsen.com'),(58,'2018-12-24','Jeg skal til skoletandlægen','salik@therkildsen.com'),(59,'2018-12-25','Jeg skal i byen og score','muhammed@therkildsen.com'),(60,'2018-12-25','Jeg skal med Muahmmed i byen','peter@therkildsen.com'),(61,'2018-12-25','Jeg skal arbejde på mit andet job','martin@blirup.dk'),(62,'2018-12-26','Min hund har spist min busbillet','poul@therkildsen.com'),(63,'2018-12-26','Jeg skal i skole','salik@therkildsen.com'),(64,'2018-12-26','Min ven, Morten, er død. Nu er jeg helt alene. Jeg har bestilt en grædekone','peter@therkildsen.com'),(65,'2018-12-27','Skuespillerne drillede mig på min seneste vagt. Jeg kommer ikke foreløbigt...','maria@therkildsen.com'),(66,'2018-12-27','Jeg skal se Game of Thrones','peter@therkildsen.com'),(67,'2018-12-27','Morten giver mig stress','salik@therkildsen.com'),(68,'2018-12-28','Min kæreste er mormon, det kræver sgu en fridag','jannik@therkildsen.com'),(69,'2018-12-28','Jeg står for at skulle lave en seriøs omgang hummus. En god hummus tager tid.','muhammed@therkildsen.com'),(70,'2018-12-28','Min hund har spist mine arbejdssko','poul@therkildsen.com'),(71,'2018-12-29','Jeg skal til skoletandlægen','jannik@therkildsen.com'),(72,'2018-12-29','Mit knæ har fået kræft','maria@therkildsen.com'),(73,'2018-12-29','Min bror er kommet på hospitalet','peter@therkildsen.com'),(74,'2018-12-30','Jeg skal bruge dagen på at meditere','muhammed@therkildsen.com'),(75,'2018-12-30','Min livmoder er blevet enke','maria@therkildsen.com'),(76,'2018-12-30','Jeg tager til Jylland','salik@therkildsen.com'),(77,'2018-12-31','Jeg regner med at få fnat i julegave, det bryder ud en uge senere formoder jeg','jannik@therkildsen.com'),(78,'2018-12-31','Jeg skal til begravelse','peter@therkildsen.com'),(79,'2018-12-31','Jeg fejrer nytår på Kreta','salik@therkildsen.com');
-INSERT INTO `vagtbehov` VALUES (1,'2018-12-24 16:00:00','2018-12-25 03:00:00','JuleaftenBar - Kom Glad!','Vi ved jo streng taget ikke om baren lukker kl. 03, men dette program kræver at jeg udfylder feltet...'),(2,'2019-12-24 16:00:00','2019-12-25 03:00:00','JuleaftenBar - Kom Glad!','Vi ved jo streng taget ikke om baren lukker kl. 03, men dette program kræver at jeg udfylder feltet...'),(3,'2020-12-24 16:00:00','2020-12-25 03:00:00','JuleaftenBar - Kom Glad!','Vi ved jo streng taget ikke om baren lukker kl. 03, men dette program kræver at jeg udfylder feltet...'),(4,'2021-12-24 16:00:00','2021-12-25 03:00:00','JuleaftenBar - Kom Glad!','Vi ved jo streng taget ikke om baren lukker kl. 03, men dette program kræver at jeg udfylder feltet...'),(5,'2022-12-24 16:00:00','2022-12-25 03:00:00','JuleaftenBar - Kom Glad!','Vi ved jo streng taget ikke om baren lukker kl. 03, men dette program kræver at jeg udfylder feltet...'),(7,'2018-12-05 16:00:00','2018-12-05 23:00:00','Billetvagt','Husk at låse når du går hjem'),(8,'2018-12-08 16:00:00','2018-12-08 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(9,'2018-12-08 16:00:00','2018-12-08 23:00:00','Billetvagt','Husk at låse når du går hjem'),(10,'2018-12-12 16:00:00','2018-12-12 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(11,'2018-12-12 16:00:00','2018-12-12 23:00:00','Billetvagt','Husk at låse når du går hjem'),(12,'2018-12-15 16:00:00','2018-12-15 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(13,'2018-12-15 16:00:00','2018-12-15 23:00:00','Billetvagt','Husk at låse når du går hjem'),(14,'2018-12-18 16:00:00','2018-12-18 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(15,'2018-12-18 16:00:00','2018-12-18 23:00:00','Billetvagt','Husk at låse når du går hjem'),(16,'2018-12-22 16:00:00','2018-12-22 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(17,'2018-12-22 16:00:00','2018-12-22 23:00:00','Billetvagt','Husk at låse når du går hjem'),(18,'2018-12-07 00:00:00','2018-12-05 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(19,'2018-12-07 00:00:00','2018-12-05 23:00:00','Billetvagt','Husk at låse når du går hjem'),(20,'2018-12-14 16:00:00','2018-12-14 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(21,'2018-12-14 16:00:00','2018-12-14 23:00:00','Billetvagt','Husk at låse når du går hjem'),(22,'2018-12-16 16:00:00','2018-12-16 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(23,'2018-12-16 16:00:00','2018-12-16 23:00:00','Billetvagt','Husk at låse når du går hjem'),(24,'2018-12-19 16:00:00','2018-12-19 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(25,'2018-12-19 16:00:00','2018-12-19 23:00:00','Billetvagt','Husk at låse når du går hjem'),(26,'2018-12-21 16:00:00','2018-12-21 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(27,'2018-12-21 16:00:00','2018-12-21 23:00:00','Billetvagt','Husk at låse når du går hjem'),(28,'2018-12-23 16:00:00','2018-12-23 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(29,'2018-12-23 16:00:00','2018-12-23 23:00:00','Billetvagt','Husk at låse når du går hjem'),(30,'2018-12-09 16:00:00','2018-12-09 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(31,'2018-12-09 16:00:00','2018-12-09 23:00:00','Billetvagt','Husk at låse når du går hjem'),(32,'2018-12-10 16:00:00','2018-12-10 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(33,'2018-12-10 16:00:00','2018-12-10 23:00:00','Billetvagt','Husk at låse når du går hjem'),(34,'2018-12-11 16:00:00','2018-12-11 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(35,'2018-12-11 16:00:00','2018-12-11 23:00:00','Billetvagt','Husk at låse når du går hjem'),(36,'2018-12-13 16:00:00','2018-12-13 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(37,'2018-12-13 16:00:00','2018-12-13 23:00:00','Billetvagt','Husk at låse når du går hjem'),(38,'2018-12-17 16:00:00','2018-12-17 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(39,'2018-12-17 16:00:00','2018-12-17 23:00:00','Billetvagt','Husk at låse når du går hjem'),(40,'2018-12-01 16:00:00','2018-12-01 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(41,'2018-12-01 16:00:00','2018-12-01 23:00:00','Billetvagt','Husk at låse når du går hjem'),(42,'2018-12-02 16:00:00','2018-12-02 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(43,'2018-12-02 16:00:00','2018-12-02 23:00:00','Billetvagt','Husk at låse når du går hjem'),(44,'2018-12-03 16:00:00','2018-12-03 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(45,'2018-12-03 16:00:00','2018-12-03 23:00:00','Billetvagt','Husk at låse når du går hjem'),(46,'2018-12-04 16:00:00','2018-12-04 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(47,'2018-12-04 16:00:00','2018-12-04 23:00:00','Billetvagt','Husk at låse når du går hjem'),(48,'2018-12-06 16:00:00','2018-12-06 23:00:00','Barvagt','Husk at gøre rent efter forestillingen'),(49,'2018-12-06 16:00:00','2018-12-06 23:00:00','Billetvagt','Husk at låse når du går hjem'),(50,'2018-12-05 16:00:00','2018-12-05 23:00:00','Barvagt','Husk at gøre rent efter forestillingen');
-
-
-
+-- Dump completed on 2018-07-29 12:53:45
